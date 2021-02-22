@@ -394,6 +394,6 @@ FodyWeavers.xsd
 *.out
 *.app
 
-# Our excluded
+# Temp garbage
 ./PEngine/Intermediate/*
 ./PEngine/Binaries/*
