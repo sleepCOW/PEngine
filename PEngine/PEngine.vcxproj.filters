@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source">
+      <UniqueIdentifier>{dffd8fc0-349e-492a-bbff-b8a28b8b49cb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Editor">
+      <UniqueIdentifier>{90e3d757-eaf7-4e91-8d90-10615486c31a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Runtime">
+      <UniqueIdentifier>{e7a55c07-a007-43c4-a36c-e8e78aaaebfb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\ThirdParty">
+      <UniqueIdentifier>{070e30e1-232b-4e73-907d-c8aacec9b2d5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Runtime\Launch">
+      <UniqueIdentifier>{b7559d6b-ab36-410d-a2b4-837915e4073c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Runtime\Launch\Public">
+      <UniqueIdentifier>{e8781c9a-d1f2-4770-bc78-455bbceedf61}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Runtime\Launch\Private">
+      <UniqueIdentifier>{5cab4746-4caf-4f97-8c2e-6c919fc2120f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Runtime\Core">
+      <UniqueIdentifier>{9be94427-1098-4d7b-9380-042d84163d12}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Runtime\Core\Public">
+      <UniqueIdentifier>{f89eb70d-ff56-4d7d-a052-502bc2284e2c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Runtime\Core\Private">
+      <UniqueIdentifier>{521302c3-def7-4462-86fb-cb57fd569583}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Source\Runtime\Launch\Private\Windows\LaunchWindows.cpp">
+      <Filter>Source\Runtime\Launch\Private</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Source\Runtime\Core\Public\CoreMinimal.h">
+      <Filter>Source\Runtime\Core\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Runtime\Core\Public\CoreTypes.h">
+      <Filter>Source\Runtime\Core\Public</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
