@@ -16,3 +16,4 @@
 * Commonly used headers
 */
 
+#include "Core/Public/CoreGlobals.h"
