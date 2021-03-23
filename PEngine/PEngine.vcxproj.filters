@@ -389,6 +389,9 @@
     <ClInclude Include="Source\Runtime\Launch\Public\EditorEngine.h">
       <Filter>Source\Runtime\Launch\Public</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Runtime\Core\Public\CoreDefines.h">
+      <Filter>Source\Runtime\Core\Public</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Source\ThirdParty\SDL\Public\SDL_config.h.cmake">

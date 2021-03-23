@@ -5,12 +5,13 @@
  */
 
 #include "CoreTypes.h"
+#include "CoreDefines.h"
 
 /**
 * Forward declarations
 */
 
-
+typedef union SDL_Event SDL_Event;
 
 /**
 * Commonly used headers

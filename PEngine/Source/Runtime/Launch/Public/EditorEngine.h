@@ -7,6 +7,7 @@
  */
 class CEditorEngine : public CEngine 
 {
+	DECLARE_CLASS(CEditorEngine, CEngine)
 public:
 
 	virtual bool Init() override;
@@ -17,4 +18,6 @@ public:
 
 	// Editor UI implementation should exist only for EditorEngine
 	virtual void EditorUI(float DeltaTime) override;
+
+	virtual void HandleInput(const SDL_Event& Event) override;
 };

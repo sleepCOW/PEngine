@@ -7,6 +7,8 @@
  */
 class CGameEngine : public CEngine
 {
+	DECLARE_CLASS(CGameEngine, CEngine)
+
 public:
 
 	// Editor UI implementation should exist only for EditorEngine

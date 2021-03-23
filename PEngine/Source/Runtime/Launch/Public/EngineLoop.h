@@ -10,6 +10,7 @@
 class CEngine
 	: public IEngineLoop
 {
+	DECLARE_CLASS(CEngine, IEngineLoop)
 public:
 
 	// no function calls are available here, this function should only return width, height and fullscreen values
@@ -24,6 +25,8 @@ public:
 
 	// Editor UI implementation should exist only for EditorEngine
 	virtual void EditorUI(float DeltaTime) = 0;
+
+	virtual void HandleInput(const SDL_Event& Event);
 };
 
 int Run(CEngine* EngineLoop);

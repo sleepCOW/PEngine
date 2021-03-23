@@ -38,6 +38,14 @@ void CEngine::Tick(float DeltaTime)
 
 }
 
+void CEngine::HandleInput(const SDL_Event& Event)
+{
+	if (Event.type == SDL_QUIT)
+	{
+		GIsRequestingExit = true;
+	}
+}
+
 SDL_Renderer* CreateOpenGLRenderer(SDL_Window* Window)
 {
 	for (int i = 0; i < SDL_GetNumRenderDrivers(); ++i)
@@ -102,35 +110,9 @@ int Run(CEngine* EngineLoop)
 			float DeltaTime = (Start - End) / 1000.f;
 			SDL_RenderClear(GRenderer);
 
-			ImGuiIO& io = ImGui::GetIO();
-			int wheel = 0;
 			while (SDL_PollEvent(&Event) != 0) {
-				ImGui_ImplSDL2_ProcessEvent(&Event);
-
-				if (Event.type == SDL_WINDOWEVENT)
-				{
-					if (Event.window.event == SDL_WINDOWEVENT_SIZE_CHANGED)
-					{
-						io.DisplaySize.x = static_cast<float>(Event.window.data1);
-						io.DisplaySize.y = static_cast<float>(Event.window.data2);
-					}
-				}
-				else if (Event.type == SDL_QUIT)
-				{
-					GIsRequestingExit = true;
-				}
+				EngineLoop->HandleInput(Event);
 			}
-
-			int mouseX, mouseY;
-			const int buttons = SDL_GetMouseState(&mouseX, &mouseY);
-
-			// Setup low-level inputs (e.g. on Win32, GetKeyboardState(), or write to those fields from your Windows message loop handlers, etc.)
-
-			io.DeltaTime = 1.0f / 60.0f;
-			io.MousePos = ImVec2(static_cast<float>(mouseX), static_cast<float>(mouseY));
-			io.MouseDown[0] = buttons & SDL_BUTTON(SDL_BUTTON_LEFT);
-			io.MouseDown[1] = buttons & SDL_BUTTON(SDL_BUTTON_RIGHT);
-			io.MouseWheel = static_cast<float>(wheel);
 
 			EngineLoop->Tick(DeltaTime);
 			EngineLoop->EditorUI(DeltaTime);
