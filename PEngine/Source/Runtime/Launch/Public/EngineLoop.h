@@ -5,8 +5,9 @@
 
 /**
  * Implements the main engine loop.
+ * Have common parts of GameEngine and EditorEngine
  */
-class CEngineLoop
+class CEngine
 	: public IEngineLoop
 {
 public:
@@ -20,9 +21,12 @@ public:
 	virtual void Close() override;
 
 	virtual void Tick(float DeltaTime) override;
+
+	// Editor UI implementation should exist only for EditorEngine
+	virtual void EditorUI(float DeltaTime) = 0;
 };
 
-int Run(IEngineLoop* EngineLoop);
+int Run(CEngine* EngineLoop);
 
 /** Global engine loop object. */
-extern CEngineLoop* GEngineLoop;
+extern CEngine* GEngineLoop;

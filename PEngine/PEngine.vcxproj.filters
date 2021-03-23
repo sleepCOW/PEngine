@@ -37,6 +37,18 @@
     <Filter Include="Source\ThirdParty\SDL2\Public">
       <UniqueIdentifier>{e39097e5-b06f-42f7-a4c3-1f97494cf6d0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source\ThirdParty\imgui">
+      <UniqueIdentifier>{2b1e61fb-06a5-4881-8ce3-e8353495d5a2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\ThirdParty\imgui_sdl">
+      <UniqueIdentifier>{795d5a0f-194e-458d-a3f2-494a452a78be}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\ThirdParty\imgui\Public">
+      <UniqueIdentifier>{165e261c-d9d9-4ef4-9b8d-5f124afd7f0e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\ThirdParty\imgui_sdl\Public">
+      <UniqueIdentifier>{ac690742-cf66-4245-99db-8b2a7c11f930}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Runtime\Launch\Private\Windows\LaunchWindows.cpp">
@@ -50,6 +62,30 @@
     </ClCompile>
     <ClCompile Include="Source\Runtime\Core\Private\CoreGlobals.cpp">
       <Filter>Source\Runtime\Core\Private</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ThirdParty\imgui\Public\imgui.cpp">
+      <Filter>Source\ThirdParty\imgui\Public</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ThirdParty\imgui\Public\imgui_demo.cpp">
+      <Filter>Source\ThirdParty\imgui\Public</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ThirdParty\imgui\Public\imgui_draw.cpp">
+      <Filter>Source\ThirdParty\imgui\Public</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ThirdParty\imgui\Public\imgui_impl_sdl.cpp">
+      <Filter>Source\ThirdParty\imgui\Public</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ThirdParty\imgui\Public\imgui_widgets.cpp">
+      <Filter>Source\ThirdParty\imgui\Public</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ThirdParty\imgui_sdl\Public\imgui_sdl.cpp">
+      <Filter>Source\ThirdParty\imgui_sdl\Public</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Runtime\Launch\Private\GameEngine.cpp">
+      <Filter>Source\Runtime\Launch\Private</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Runtime\Launch\Private\EditorEngine.cpp">
+      <Filter>Source\Runtime\Launch\Private</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -322,6 +358,36 @@
     </ClInclude>
     <ClInclude Include="Source\Runtime\Core\Public\AssetManager.h">
       <Filter>Source\Runtime\Core\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ThirdParty\imgui\Public\imconfig.h">
+      <Filter>Source\ThirdParty\imgui\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ThirdParty\imgui\Public\imgui.h">
+      <Filter>Source\ThirdParty\imgui\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ThirdParty\imgui\Public\imgui_impl_sdl.h">
+      <Filter>Source\ThirdParty\imgui\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ThirdParty\imgui\Public\imgui_internal.h">
+      <Filter>Source\ThirdParty\imgui\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ThirdParty\imgui\Public\imstb_rectpack.h">
+      <Filter>Source\ThirdParty\imgui\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ThirdParty\imgui\Public\imstb_textedit.h">
+      <Filter>Source\ThirdParty\imgui\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ThirdParty\imgui\Public\imstb_truetype.h">
+      <Filter>Source\ThirdParty\imgui\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ThirdParty\imgui_sdl\Public\imgui_sdl.h">
+      <Filter>Source\ThirdParty\imgui_sdl\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Runtime\Launch\Public\GameEngine.h">
+      <Filter>Source\Runtime\Launch\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Runtime\Launch\Public\EditorEngine.h">
+      <Filter>Source\Runtime\Launch\Public</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
