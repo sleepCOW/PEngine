@@ -397,3 +397,6 @@ FodyWeavers.xsd
 # Temp garbage
 ./PEngine/Intermediate/*
 ./PEngine/Binaries/*
+
+# ImGui cache
+imgui.ini
