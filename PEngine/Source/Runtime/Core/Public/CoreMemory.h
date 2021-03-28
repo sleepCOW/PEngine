@@ -19,6 +19,9 @@ using UniquePtr = std::unique_ptr<T, Deleter>;
 template<class T>
 using SharedPtr = std::shared_ptr<T>;
 
+template<class T>
+using WeakPtr = std::shared_ptr<T>;
+
 // Containers
 template<class T, class Allocator = std::allocator<T>>
 using Vector = std::vector<T, Allocator>;
@@ -30,7 +33,7 @@ template<class T, class Allocator = std::allocator<T>>
 using Queue = std::queue<T, Allocator>;
 
 template<class Key, class T, class Compare = std::less<Key>, class Allocator = std::allocator<std::pair<const Key, T>>>
-using Map = std::Map<Key, T, Compare, Allocator>;
+using Map = std::map<Key, T, Compare, Allocator>;
 
 template<class Key, class Compare = std::less<Key>, class Allocator = std::allocator<Key>>
 using Set = std::set<Key, Compare, Allocator>;

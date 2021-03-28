@@ -5,11 +5,15 @@
  */
 
 #include "CoreTypes.h"
+#include "CoreMemory.h"
 #include "CoreDefines.h"
 
 /**
 * Forward declarations
 */
+
+class CObject;
+class CComponent;
 
 typedef union SDL_Event SDL_Event;
 
