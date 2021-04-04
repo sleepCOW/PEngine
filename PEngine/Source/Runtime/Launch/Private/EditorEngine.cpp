@@ -62,7 +62,11 @@ void CEditorEngine::HandleInput(const SDL_Event& Event)
 		{
 			InputOutput.DisplaySize.x = static_cast<float>(Event.window.data1);
 			InputOutput.DisplaySize.y = static_cast<float>(Event.window.data2);
-		}
+		}	
+	}
+	else if (Event.type == SDL_MOUSEWHEEL)
+	{
+		Wheel = Event.wheel.y;
 	}
 
 	int mouseX, mouseY;
