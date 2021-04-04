@@ -1,5 +1,8 @@
 #include "Launch/Public/EditorEngine.h"
 
+#include "Core/Public/CoreMinimal.h"
+#include "Core/Public/ObjectManager.h"
+
 #include "imgui/Public/imgui.h"
 #include "imgui/Public/imgui_impl_sdl.h"
 #include "imgui_sdl/Public/imgui_sdl.h"

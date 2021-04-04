@@ -8,6 +8,7 @@
 class CEditorEngine : public CEngine 
 {
 	DECLARE_CLASS(CEditorEngine, CEngine)
+
 public:
 
 	virtual bool Init() override;

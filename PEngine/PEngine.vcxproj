@@ -318,7 +318,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Source\Runtime\Core\Private\AssetManager.cpp" />
+    <ClCompile Include="Source\Runtime\Core\Private\Component.cpp" />
     <ClCompile Include="Source\Runtime\Core\Private\CoreGlobals.cpp" />
+    <ClCompile Include="Source\Runtime\Core\Private\CoreMemory.cpp" />
+    <ClCompile Include="Source\Runtime\Core\Private\Object.cpp" />
+    <ClCompile Include="Source\Runtime\Core\Private\ObjectManager.cpp" />
     <ClCompile Include="Source\Runtime\Launch\Private\EditorEngine.cpp" />
     <ClCompile Include="Source\Runtime\Launch\Private\EngineLoop.cpp" />
     <ClCompile Include="Source\Runtime\Launch\Private\GameEngine.cpp" />
@@ -332,9 +336,13 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Runtime\Core\Public\AssetManager.h" />
+    <ClInclude Include="Source\Runtime\Core\Public\Component.h" />
     <ClInclude Include="Source\Runtime\Core\Public\CoreDefines.h" />
+    <ClInclude Include="Source\Runtime\Core\Public\CoreMemory.h" />
     <ClInclude Include="Source\Runtime\Core\Public\CoreMinimal.h" />
     <ClInclude Include="Source\Runtime\Core\Public\CoreTypes.h" />
+    <ClInclude Include="Source\Runtime\Core\Public\Object.h" />
+    <ClInclude Include="Source\Runtime\Core\Public\ObjectManager.h" />
     <ClInclude Include="Source\Runtime\Launch\Public\EditorEngine.h" />
     <ClInclude Include="Source\Runtime\Launch\Public\EngineLoop.h" />
     <ClInclude Include="Source\Runtime\Launch\Public\GameEngine.h" />

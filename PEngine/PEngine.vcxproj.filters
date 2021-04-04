@@ -4,9 +4,6 @@
     <Filter Include="Source">
       <UniqueIdentifier>{dffd8fc0-349e-492a-bbff-b8a28b8b49cb}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source\Editor">
-      <UniqueIdentifier>{90e3d757-eaf7-4e91-8d90-10615486c31a}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source\Runtime">
       <UniqueIdentifier>{e7a55c07-a007-43c4-a36c-e8e78aaaebfb}</UniqueIdentifier>
     </Filter>
@@ -49,6 +46,9 @@
     <Filter Include="Source\ThirdParty\imgui_sdl\Public">
       <UniqueIdentifier>{ac690742-cf66-4245-99db-8b2a7c11f930}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source\Runtime\Interface">
+      <UniqueIdentifier>{f353ca1d-debf-40d4-9e22-d6fa7180e75f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Runtime\Launch\Private\Windows\LaunchWindows.cpp">
@@ -86,6 +86,18 @@
     </ClCompile>
     <ClCompile Include="Source\Runtime\Launch\Private\EditorEngine.cpp">
       <Filter>Source\Runtime\Launch\Private</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Runtime\Core\Private\Component.cpp">
+      <Filter>Source\Runtime\Core\Private</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Runtime\Core\Private\Object.cpp">
+      <Filter>Source\Runtime\Core\Private</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Runtime\Core\Private\CoreMemory.cpp">
+      <Filter>Source\Runtime\Core\Private</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Runtime\Core\Private\ObjectManager.cpp">
+      <Filter>Source\Runtime\Core\Private</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -390,6 +402,18 @@
       <Filter>Source\Runtime\Launch\Public</Filter>
     </ClInclude>
     <ClInclude Include="Source\Runtime\Core\Public\CoreDefines.h">
+      <Filter>Source\Runtime\Core\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Runtime\Core\Public\Object.h">
+      <Filter>Source\Runtime\Core\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Runtime\Core\Public\Component.h">
+      <Filter>Source\Runtime\Core\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Runtime\Core\Public\CoreMemory.h">
+      <Filter>Source\Runtime\Core\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Runtime\Core\Public\ObjectManager.h">
       <Filter>Source\Runtime\Core\Public</Filter>
     </ClInclude>
   </ItemGroup>

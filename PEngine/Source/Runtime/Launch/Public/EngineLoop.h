@@ -1,7 +1,12 @@
 #pragma once
 
-#include "Core/Public/CoreMinimal.h"
 #include "Engine/Public/PEngine.h"
+#include "Core/Public/CoreDefines.h"
+#include "Core/Public/CoreMemory.h"
+#include "Core/Public/ObjectManager.h"
+
+typedef union SDL_Event SDL_Event;
+class CObjectManager;
 
 /**
  * Implements the main engine loop.
@@ -27,9 +32,32 @@ public:
 	virtual void EditorUI(float DeltaTime) = 0;
 
 	virtual void HandleInput(const SDL_Event& Event);
+
+	/** Access Helpers */
+	CObjectManager* GetObjectManager() const;
+
+public:
+
+protected:
+	UPtr<CObjectManager> ObjectManager;
 };
 
 int Run(CEngine* EngineLoop);
 
 /** Global engine loop object. */
-extern CEngine* GEngineLoop;
+extern class CEngine* GEngineLoop;
+
+// Create new object in runtime/editor
+template <typename T>
+T* NewObject(CObject* Owner)
+{
+	CObjectManager* ObjectManager = GEngineLoop->GetObjectManager();
+
+	SPtr<CObject> CreatedObject = std::make_shared<T>(Owner);
+
+	CreatedObject->PreInit();
+	
+	ObjectManager->AddObject(NewObject);
+
+	return;
+}

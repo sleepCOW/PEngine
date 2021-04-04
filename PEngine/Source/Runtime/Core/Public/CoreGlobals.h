@@ -3,6 +3,7 @@
 #include "Core/Public/CoreTypes.h"
 #include "windows.h"
 
+/** Global engine loop object. */
 extern struct SDL_Renderer* GRenderer;
 extern struct SDL_Window* GMainWindow;
 

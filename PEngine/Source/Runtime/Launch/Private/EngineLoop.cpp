@@ -1,5 +1,7 @@
 #include "Launch/Public/EngineLoop.h"
 
+#include "Core/Public/ObjectManager.h"
+
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
@@ -25,6 +27,8 @@ void CEngine::PreInit(SWindowParam& OutWindowParam)
 
 bool CEngine::Init()
 {
+	ObjectManager = std::make_unique<CObjectManager>();
+
 	return true;
 }
 
@@ -36,6 +40,7 @@ void CEngine::Close()
 void CEngine::Tick(float DeltaTime)
 {
 
+
 }
 
 void CEngine::HandleInput(const SDL_Event& Event)
@@ -44,6 +49,11 @@ void CEngine::HandleInput(const SDL_Event& Event)
 	{
 		GIsRequestingExit = true;
 	}
+}
+
+CObjectManager* CEngine::GetObjectManager() const
+{
+	return ObjectManager.get();
 }
 
 SDL_Renderer* CreateOpenGLRenderer(SDL_Window* Window)

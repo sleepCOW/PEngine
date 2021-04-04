@@ -7,6 +7,7 @@
 #include "CoreTypes.h"
 #include "CoreMemory.h"
 #include "CoreDefines.h"
+#include "CoreGlobals.h"
 
 /**
 * Forward declarations
@@ -14,6 +15,11 @@
 
 class CObject;
 class CComponent;
+class CObjectManager;
+
+/**
+* Typedefs
+*/
 
 typedef union SDL_Event SDL_Event;
 
@@ -21,4 +27,5 @@ typedef union SDL_Event SDL_Event;
 * Commonly used headers
 */
 
-#include "Core/Public/CoreGlobals.h"
+#include "Core/Public/ObjectManager.h"
+#include "Core/Public/AssetManager.h"

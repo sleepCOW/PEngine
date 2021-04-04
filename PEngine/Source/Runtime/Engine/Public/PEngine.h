@@ -1,5 +1,7 @@
 #pragma once
 
+#include "Core/Public/CoreTypes.h"
+
 /** Public interface to FEngineLoop so we can call it from editor or editor code */
 class IEngineLoop
 {

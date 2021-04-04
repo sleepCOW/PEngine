@@ -1,7 +1,5 @@
 #pragma once
 
-#include "Core/Public/CoreMinimal.h"
-
 // STL containers
 #include <memory>
 #include <vector>
@@ -20,7 +18,16 @@ template<class T>
 using SharedPtr = std::shared_ptr<T>;
 
 template<class T>
-using WeakPtr = std::shared_ptr<T>;
+using WeakPtr = std::weak_ptr<T>;
+
+template<class T, class Deleter = std::default_delete<T>>
+using UPtr = std::unique_ptr<T, Deleter>;
+
+template<class T>
+using SPtr = std::shared_ptr<T>;
+
+template<class T>
+using WPtr = std::weak_ptr<T>;
 
 // Containers
 template<class T, class Allocator = std::allocator<T>>
