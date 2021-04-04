@@ -35,6 +35,16 @@ void CObject::Tick(float DeltaTime)
 	}
 }
 
+void CObject::AddComponent(CComponent* Component)
+{
+	Components.push_back(Component->GetComponentShared());
+}
+
+void CObject::AddComponent(SPtr<CComponent> Component)
+{
+	Components.push_back(Component);
+}
+
 SPtr<CObject> CObject::GetShared()
 {
 	return shared_from_this();

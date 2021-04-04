@@ -24,6 +24,9 @@ public:
 	/** Object tick, called only in runtime */
 	virtual void Tick(float DeltaTime);
 
+	void AddComponent(CComponent* Component);
+	void AddComponent(SPtr<CComponent> Component);
+
 	/** Helper functions */
 	SPtr<CObject> GetShared();
 	SPtr<const CObject> GetShared() const;

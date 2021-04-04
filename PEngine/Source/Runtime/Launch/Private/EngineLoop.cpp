@@ -1,6 +1,7 @@
 #include "Launch/Public/EngineLoop.h"
 
 #include "Core/Public/ObjectManager.h"
+#include "Component/Public/RenderComponent.h"
 
 #include <stdlib.h>
 #include <stdio.h>
@@ -44,6 +45,15 @@ void CEngine::Tick(float DeltaTime)
 		if (Object->bActive)
 		{
 			Object->Tick(DeltaTime);
+		}
+	}
+
+	// Render part
+	for (auto& RenderComponent : ObjectManager->GetRenderComponents())
+	{
+		if (RenderComponent->bActive)
+		{
+			RenderComponent->Draw();
 		}
 	}
 }
@@ -149,4 +159,3 @@ int Run(CEngine* EngineLoop)
 	SDL_Quit();
 	return(0);
 }
-

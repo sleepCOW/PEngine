@@ -57,7 +57,22 @@ T* NewObject(CObject* Owner)
 
 	CreatedObject->PreInit();
 	
-	ObjectManager->AddObject(NewObject);
+	ObjectManager->AddObject(CreatedObject);
 
-	return;
+	return CreatedObject.get();
+}
+
+template <typename T>
+T* NewComponent(CObject* Owner)
+{
+	SPtr<CComponent> CreatedComponent = std::make_shared<T>(Owner);
+
+	if (Owner)
+	{
+		Owner->AddComponent(CreatedComponent);
+	}
+
+	CreatedComponent->PreInit();
+
+	return CreatedComponent.get();
 }

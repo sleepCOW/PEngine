@@ -399,4 +399,4 @@ FodyWeavers.xsd
 ./PEngine/Binaries/*
 
 # ImGui cache
-imgui.ini
+./PEngine/imgui.ini

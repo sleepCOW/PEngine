@@ -49,6 +49,15 @@
     <Filter Include="Source\Runtime\Interface">
       <UniqueIdentifier>{f353ca1d-debf-40d4-9e22-d6fa7180e75f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source\Runtime\Component">
+      <UniqueIdentifier>{ec9705f6-b463-43be-9b70-b95b56790516}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Runtime\Component\Public">
+      <UniqueIdentifier>{d54748da-26a5-40a2-bb02-767a33876f90}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Runtime\Component\Private">
+      <UniqueIdentifier>{66972b0b-14cf-4ea0-be5c-64acdb08d13d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Runtime\Launch\Private\Windows\LaunchWindows.cpp">
@@ -98,6 +107,9 @@
     </ClCompile>
     <ClCompile Include="Source\Runtime\Core\Private\ObjectManager.cpp">
       <Filter>Source\Runtime\Core\Private</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Runtime\Component\Private\RenderComponent.cpp">
+      <Filter>Source\Runtime\Component\Private</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -415,6 +427,9 @@
     </ClInclude>
     <ClInclude Include="Source\Runtime\Core\Public\ObjectManager.h">
       <Filter>Source\Runtime\Core\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Runtime\Component\Public\RenderComponent.h">
+      <Filter>Source\Runtime\Component\Public</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
