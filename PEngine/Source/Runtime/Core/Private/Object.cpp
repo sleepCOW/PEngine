@@ -1,4 +1,5 @@
 #include "Core/Public/Object.h"
+#include "Core/Public/Component.h"
 
 CObject::CObject(CObject* ThisOwner)
 {
@@ -25,7 +26,13 @@ void CObject::Init()
 
 void CObject::Tick(float DeltaTime)
 {
-
+	for (auto& Component : GetComponents())
+	{
+		if (Component->bActive)
+		{
+			Component->Tick(DeltaTime);
+		}
+	}
 }
 
 SPtr<CObject> CObject::GetShared()
@@ -36,4 +43,9 @@ SPtr<CObject> CObject::GetShared()
 SPtr<const CObject> CObject::GetShared() const
 {
 	return shared_from_this();
+}
+
+Vector<SPtr<CComponent>>& CObject::GetComponents()
+{
+	return Components;
 }

@@ -39,8 +39,13 @@ void CEngine::Close()
 
 void CEngine::Tick(float DeltaTime)
 {
-
-
+	for (auto& Object : ObjectManager->GetObjects())
+	{
+		if (Object->bActive)
+		{
+			Object->Tick(DeltaTime);
+		}
+	}
 }
 
 void CEngine::HandleInput(const SDL_Event& Event)

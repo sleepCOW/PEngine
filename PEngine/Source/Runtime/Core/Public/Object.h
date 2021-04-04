@@ -27,6 +27,10 @@ public:
 	/** Helper functions */
 	SPtr<CObject> GetShared();
 	SPtr<const CObject> GetShared() const;
+	Vector<SPtr<CComponent>>& GetComponents();
+
+	/** Whether this object is active and ticking */
+	bool bActive;
 
 protected:
 	/** Owner of this component */

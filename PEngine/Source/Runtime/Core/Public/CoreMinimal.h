@@ -27,5 +27,4 @@ typedef union SDL_Event SDL_Event;
 * Commonly used headers
 */
 
-#include "Core/Public/ObjectManager.h"
 #include "Core/Public/AssetManager.h"
