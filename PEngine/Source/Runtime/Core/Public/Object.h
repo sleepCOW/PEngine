@@ -40,4 +40,5 @@ protected:
 	WeakPtr<CObject> Owner;
 
 	Vector<SPtr<CComponent>> Components;
+
 };

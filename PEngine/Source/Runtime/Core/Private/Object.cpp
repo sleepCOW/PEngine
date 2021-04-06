@@ -1,6 +1,8 @@
 #include "Core/Public/Object.h"
 #include "Core/Public/Component.h"
 
+DEFINE_META(CObject)
+
 CObject::CObject(CObject* ThisOwner)
 {
 	if (ThisOwner)

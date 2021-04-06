@@ -1,3 +1,4 @@
+#ifdef WITH_EDITOR
 #pragma once
 
 #include "Launch/Public/EngineLoop.h"
@@ -22,3 +23,4 @@ public:
 
 	virtual void HandleInput(const SDL_Event& Event) override;
 };
+#endif

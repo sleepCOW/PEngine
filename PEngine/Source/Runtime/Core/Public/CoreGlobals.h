@@ -10,6 +10,10 @@ extern struct SDL_Window* GMainWindow;
 extern bool GIsRequestingExit;
 extern bool GEngineInitialized;
 
+#ifdef WITH_EDITOR
+extern class CReflectionManager ReflectionManager;
+#endif
+
 FORCEINLINE bool IsEngineExitRequested()
 {
 	return GIsRequestingExit;

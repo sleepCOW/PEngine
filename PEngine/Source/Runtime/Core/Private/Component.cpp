@@ -1,5 +1,7 @@
 #include "Core/Public/Component.h"
 
+DEFINE_META(CComponent)
+
 CComponent::CComponent(CObject* Owner) : Super(Owner)
 {
 }

@@ -1,5 +1,6 @@
 #pragma once
 
+
 /**
  * Low level includes.
  */
@@ -28,3 +29,5 @@ typedef union SDL_Event SDL_Event;
 */
 
 #include "Core/Public/AssetManager.h"
+#include "Core/Public/ReflectionManager.h"
+#include <cassert>

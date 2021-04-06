@@ -1,19 +1,23 @@
+#ifdef WITH_EDITOR
 #include "Launch/Public/EditorEngine.h"
 
 #include "Core/Public/CoreMinimal.h"
 #include "Core/Public/ObjectManager.h"
+#include "Core/Public/ReflectionManager.h"
 
 #include "imgui/Public/imgui.h"
 #include "imgui/Public/imgui_impl_sdl.h"
 #include "imgui_sdl/Public/imgui_sdl.h"
 #include "SDL2/Public/SDL.h"
 
+CReflectionManager ReflectionManager;
+
 bool CEditorEngine::Init()
 {
 	Super::Init();
 
-	SDL_assert(GMainWindow);
-	SDL_assert(GRenderer);
+	assert(GMainWindow);
+	assert(GRenderer);
 
 	int Width, Height;
 	SDL_GetWindowSize(GMainWindow, &Width, &Height);
@@ -79,3 +83,4 @@ void CEditorEngine::HandleInput(const SDL_Event& Event)
 	InputOutput.MouseDown[1] = buttons & SDL_BUTTON(SDL_BUTTON_RIGHT);
 	InputOutput.MouseWheel = static_cast<float>(Wheel);
 }
+#endif

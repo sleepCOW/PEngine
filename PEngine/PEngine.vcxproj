@@ -324,6 +324,7 @@
     <ClCompile Include="Source\Runtime\Core\Private\CoreMemory.cpp" />
     <ClCompile Include="Source\Runtime\Core\Private\Object.cpp" />
     <ClCompile Include="Source\Runtime\Core\Private\ObjectManager.cpp" />
+    <ClCompile Include="Source\Runtime\Core\Private\ReflectionManager.cpp" />
     <ClCompile Include="Source\Runtime\Launch\Private\EditorEngine.cpp" />
     <ClCompile Include="Source\Runtime\Launch\Private\EngineLoop.cpp" />
     <ClCompile Include="Source\Runtime\Launch\Private\GameEngine.cpp" />
@@ -345,6 +346,7 @@
     <ClInclude Include="Source\Runtime\Core\Public\CoreTypes.h" />
     <ClInclude Include="Source\Runtime\Core\Public\Object.h" />
     <ClInclude Include="Source\Runtime\Core\Public\ObjectManager.h" />
+    <ClInclude Include="Source\Runtime\Core\Public\ReflectionManager.h" />
     <ClInclude Include="Source\Runtime\Launch\Public\EditorEngine.h" />
     <ClInclude Include="Source\Runtime\Launch\Public\EngineLoop.h" />
     <ClInclude Include="Source\Runtime\Launch\Public\GameEngine.h" />
