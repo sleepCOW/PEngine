@@ -1,5 +1,7 @@
 #pragma once
 
+#include <type_traits>
+
 #ifdef WITH_EDITOR
 #define DECLARE_CLASS( ClassName, BaseClassName ) \
 	private: \
@@ -24,7 +26,7 @@
 
 #ifdef WITH_EDITOR
 #define DEFINE_META(ClassName) \
-	CReflectionData ClassName::ReflectionData = CReflectionData(#ClassName);
+	CReflectionData ClassName::ReflectionData = CReflectionData(#ClassName, std::is_base_of<CComponent, ClassName>::value);
 #else
 #define DEFINE_META(ClassName)
 #endif
