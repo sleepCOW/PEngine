@@ -1,3 +1,11 @@
+#include "Core/Public/AssetManager.h"
+#include "SDL2/Public/SDL_image.h"
+
+CAssetManager::CAssetManager()
+{
+
+}
+
 // 
 // 
 // class Sprite {
@@ -79,3 +87,66 @@
 // 	w = viewport.w;
 // 	h = viewport.h;
 // }
+
+CAssetManager& CAssetManager::GetAssetManager()
+{
+	static CAssetManager AssetManager;
+	return AssetManager;
+}
+
+STextInfo& CAssetManager::GetOrLoadTexture(const String& Path)
+{
+	// If texture already loaded return it
+	if (PathToTexture.find(Path) != PathToTexture.end())
+	{
+		return LoadedTextures[PathToTexture[Path]];
+	}
+
+	// Load texture otherwise
+	assert(GEngineInitialized);
+	assert(GRenderer);
+
+	STextInfo TextureInfo = {IMG_LoadTexture(GRenderer, Path.data())};
+	if (!TextureInfo.Texture)
+	{
+		fprintf(stderr, "Couldn't load %s: %s\n", Path.data(), SDL_GetError());
+		// Will return broken reference
+		return TextureInfo;
+	}
+
+	TextureInfo.Index = LoadedTextures.size();
+	PathToTexture[Path] = TextureInfo.Index;
+	// Let sprite decide whether use count should be increased
+	LoadedTextures.push_back(TextureInfo);
+
+	return LoadedTextures[TextureInfo.Index];
+}
+
+Map<const String, int>& CAssetManager::GetTextureMap()
+{
+	return PathToTexture;
+}
+
+Vector<STextInfo>& CAssetManager::GetLoadedTextures()
+{
+	return LoadedTextures;
+}
+
+Sprite::Sprite(const String& PathToTexture)
+{
+	// We assume texture is always valid
+	STextInfo& TextInfo = CAssetManager::GetAssetManager().GetOrLoadTexture(PathToTexture);
+
+	Texture = TextInfo.Texture;
+	TextureIndex = TextInfo.Index;
+	// We use this texture from this point
+	TextInfo.UsageCount += 1;
+
+	SDL_QueryTexture(Texture, nullptr, nullptr, &Width, &Height);
+}
+
+Sprite::~Sprite()
+{
+	// Decrease usage count and delete texture if < 1 but not today.
+	CAssetManager::GetAssetManager().GetLoadedTextures()[TextureIndex].UsageCount -= 1;
+}

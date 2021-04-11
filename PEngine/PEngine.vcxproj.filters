@@ -114,6 +114,9 @@
     <ClCompile Include="Source\Runtime\Core\Private\ReflectionManager.cpp">
       <Filter>Source\Runtime\Core\Private</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Runtime\Component\Private\SpriteComponent.cpp">
+      <Filter>Source\Runtime\Component\Private</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Runtime\Core\Public\CoreMinimal.h">
@@ -436,6 +439,9 @@
     </ClInclude>
     <ClInclude Include="Source\Runtime\Core\Public\ReflectionManager.h">
       <Filter>Source\Runtime\Core\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Runtime\Component\Public\SpriteComponent.h">
+      <Filter>Source\Runtime\Component\Public</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

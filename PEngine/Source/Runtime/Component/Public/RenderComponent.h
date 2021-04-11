@@ -9,7 +9,7 @@ class CRenderComponent : public CComponent
 
 public:
 
-	/** Triggers when object is created during runtime */
+	/** Triggers when object is created during runtime (both in editor and in game) */
 	virtual void PreInit();
 
 	/** Triggers when game started */
@@ -20,7 +20,4 @@ public:
 
 	/** All draw calls must be inside of this function */
 	virtual void Draw() const;
-
-protected:
-	int ZOrder;
 };

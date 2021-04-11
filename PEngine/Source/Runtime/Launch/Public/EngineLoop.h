@@ -4,6 +4,7 @@
 #include "Core/Public/CoreDefines.h"
 #include "Core/Public/CoreMemory.h"
 #include "Core/Public/ObjectManager.h"
+#include "Component/Public/RenderComponent.h"
 
 typedef union SDL_Event SDL_Event;
 class CObjectManager;
@@ -66,6 +67,12 @@ template <typename T>
 T* NewComponent(CObject* Owner)
 {
 	SPtr<CComponent> CreatedComponent = std::make_shared<T>(Owner);
+
+	if constexpr (std::is_base_of<CRenderComponent, T>::value)
+	{
+		CObjectManager* ObjectManager = GEngineLoop->GetObjectManager();
+		ObjectManager->AddRenderComponent(CreatedComponent);
+	}
 
 	if (Owner)
 	{

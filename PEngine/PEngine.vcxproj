@@ -318,6 +318,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Source\Runtime\Component\Private\RenderComponent.cpp" />
+    <ClCompile Include="Source\Runtime\Component\Private\SpriteComponent.cpp" />
     <ClCompile Include="Source\Runtime\Core\Private\AssetManager.cpp" />
     <ClCompile Include="Source\Runtime\Core\Private\Component.cpp" />
     <ClCompile Include="Source\Runtime\Core\Private\CoreGlobals.cpp" />
@@ -338,6 +339,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Runtime\Component\Public\RenderComponent.h" />
+    <ClInclude Include="Source\Runtime\Component\Public\SpriteComponent.h" />
     <ClInclude Include="Source\Runtime\Core\Public\AssetManager.h" />
     <ClInclude Include="Source\Runtime\Core\Public\Component.h" />
     <ClInclude Include="Source\Runtime\Core\Public\CoreDefines.h" />
