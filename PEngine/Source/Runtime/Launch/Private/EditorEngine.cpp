@@ -10,6 +10,7 @@
 #include "imgui_sdl/Public/imgui_sdl.h"
 #include "SDL2/Public/SDL.h"
 
+/** sleepCOW: make sure ReflectionManager is created among first created objects */
 #pragma init_seg(compiler)
 CReflectionManager ReflectionManager;
 
@@ -81,9 +82,11 @@ void CEditorEngine::EditorUI(float DeltaTime)
 	ImGui::NewFrame();
 
 	ShowMenuBar();
-	ImGui::ShowDemoWindow();
-
+	
 	if (bShowAddObject) ShowAddObject();
+
+	/** #TODO: Remove demo window */
+	ImGui::ShowDemoWindow();
 
 	ImGui::Render();
 	ImGuiSDL::Render(ImGui::GetDrawData());
@@ -112,16 +115,6 @@ void CEditorEngine::ShowMenuBar()
 	}
 }
 
-void CEditorEngine::Test()
-{
-	ImGui::Begin("Select object to create");
-
-
-	if (ImGui::Button("Create")) {}
-
-	ImGui::End();
-}
-
 void CEditorEngine::ShowMenuFile()
 {
 	if (ImGui::MenuItem("New project")) {}
@@ -138,7 +131,7 @@ void CEditorEngine::ShowAddObject()
 	Vector<String>& AllObjects = ReflectionManager.GetObjects();
 	assert(AllObjects.size()); // At least CObject should exist!
 	
-	/** #TODO: Ensure CObject always first in AllObjects list */
+	/** #TODO sleepCOW: Ensure CObject always first in AllObjects list */
 	static int Selected = 0;
 	if (ImGui::BeginCombo("Object list", AllObjects[Selected].data()))
 	{
@@ -155,12 +148,11 @@ void CEditorEngine::ShowAddObject()
 
 	if (ImGui::Button("Create")) 
 	{
+		// #TODO sleepCOW: NewObj should be added to some sort of world
 		CObject* NewObj = ReflectionManager.CreateObject(AllObjects[Selected], nullptr);
 		// Reset selected object
 		Selected = 0;
 	}
-
-	//if (ImGui::Int)
 
 	ImGui::End();
 }
