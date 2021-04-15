@@ -1,7 +1,8 @@
 #pragma once
 
-#include "Core/Public/Object.h"
+#include "CoreMemory.h"
 
+class CObject;
 class CRenderComponent;
 
 class CObjectManager
@@ -10,14 +11,12 @@ public:
 	~CObjectManager() {}
 
 	void AddObject(CObject* NewObject);
-	void AddObject(SPtr<CObject> NewObject);
 	void AddRenderComponent(CRenderComponent* NewObject);
-	void AddRenderComponent(SPtr<CRenderComponent> NewObject);
 
-	Vector<SPtr<CObject>>& GetObjects();
-	List<SPtr<CRenderComponent>>& GetRenderComponents();
+	Vector<CObject*>& GetObjects();
+	List<CRenderComponent*>& GetRenderComponents();
 
 protected:
-	Vector<SPtr<CObject>> Objects;
-	List<SPtr<CRenderComponent>> RenderComponents;
+	Vector<CObject*> Objects;
+	List<CRenderComponent*> RenderComponents;
 };

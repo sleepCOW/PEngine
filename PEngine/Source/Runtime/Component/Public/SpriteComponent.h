@@ -5,10 +5,12 @@
 /**
  * Component to render single sprite on screen
  */
-class CSpriteComponent : CRenderComponent
+class CSpriteComponent : public CRenderComponent
 {
-public:
+	DECLARE_CLASS(CSpriteComponent, CRenderComponent);
 
+public:
+	CSpriteComponent(CObject* Owner);
 
 
 protected:

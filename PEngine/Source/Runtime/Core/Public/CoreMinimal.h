@@ -28,5 +28,4 @@ typedef union SDL_Event SDL_Event;
 * Commonly used headers
 */
 
-#include "Core/Public/ReflectionManager.h"
 #include <cassert>

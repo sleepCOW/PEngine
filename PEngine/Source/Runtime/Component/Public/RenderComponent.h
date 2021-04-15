@@ -8,6 +8,7 @@ class CRenderComponent : public CComponent
 	DECLARE_CLASS(CRenderComponent, CComponent)
 
 public:
+	CRenderComponent(CObject* Owner);
 
 	/** Triggers when object is created during runtime (both in editor and in game) */
 	virtual void PreInit();

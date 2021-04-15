@@ -22,5 +22,18 @@ public:
 	virtual void EditorUI(float DeltaTime) override;
 
 	virtual void HandleInput(const SDL_Event& Event) override;
+
+protected:
+	void Test();
+	// UI BEGIN
+
+	void ShowMenuBar();
+	void ShowMenuFile();
+
+	void ShowAddObject();
+
+	bool bShowAddObject;
+
+	// UI END
 };
 #endif
