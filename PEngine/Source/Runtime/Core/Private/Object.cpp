@@ -43,3 +43,8 @@ Vector<CComponent*>& CObject::GetComponents()
 {
 	return Components;
 }
+
+rapidjson::Value CObject::Serialize()
+{
+
+}

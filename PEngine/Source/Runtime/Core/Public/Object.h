@@ -2,6 +2,7 @@
 
 #include "CoreMinimal.h"
 #include "Launch/Public/EngineLoop.h"
+#include "rapidJSON/document.h"
 
 class CComponent;
 class CRenderComponent;
@@ -30,6 +31,9 @@ public:
 
 	/** Helper functions */
 	Vector<CComponent*>& GetComponents();
+
+	virtual rapidjson::Value Serialize();
+	rapidjson::Value Deserialize();
 
 	/** Whether this object is active and ticking */
 	bool bActive;
