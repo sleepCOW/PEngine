@@ -318,6 +318,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Source\Runtime\Component\Private\RenderComponent.cpp" />
+    <ClCompile Include="Source\Runtime\Component\Private\SpriteComponent.cpp" />
     <ClCompile Include="Source\Runtime\Core\Private\AssetManager.cpp" />
     <ClCompile Include="Source\Runtime\Core\Private\Component.cpp" />
     <ClCompile Include="Source\Runtime\Core\Private\CoreGlobals.cpp" />
@@ -329,6 +330,7 @@
     <ClCompile Include="Source\Runtime\Launch\Private\EngineLoop.cpp" />
     <ClCompile Include="Source\Runtime\Launch\Private\GameEngine.cpp" />
     <ClCompile Include="Source\Runtime\Launch\Private\Windows\LaunchWindows.cpp" />
+    <ClCompile Include="Source\Runtime\Object\Private\Level.cpp" />
     <ClCompile Include="Source\ThirdParty\imgui\Public\imgui.cpp" />
     <ClCompile Include="Source\ThirdParty\imgui\Public\imgui_demo.cpp" />
     <ClCompile Include="Source\ThirdParty\imgui\Public\imgui_draw.cpp" />
@@ -375,6 +377,7 @@
     <ClInclude Include="..\..\rapidjson\include\rapidjson\stringbuffer.h" />
     <ClInclude Include="..\..\rapidjson\include\rapidjson\writer.h" />
     <ClInclude Include="Source\Runtime\Component\Public\RenderComponent.h" />
+    <ClInclude Include="Source\Runtime\Component\Public\SpriteComponent.h" />
     <ClInclude Include="Source\Runtime\Core\Public\AssetManager.h" />
     <ClInclude Include="Source\Runtime\Core\Public\Component.h" />
     <ClInclude Include="Source\Runtime\Core\Public\CoreDefines.h" />
@@ -384,9 +387,11 @@
     <ClInclude Include="Source\Runtime\Core\Public\Object.h" />
     <ClInclude Include="Source\Runtime\Core\Public\ObjectManager.h" />
     <ClInclude Include="Source\Runtime\Core\Public\ReflectionManager.h" />
+    <ClInclude Include="Source\Runtime\Interface\ISerializable.h" />
     <ClInclude Include="Source\Runtime\Launch\Public\EditorEngine.h" />
     <ClInclude Include="Source\Runtime\Launch\Public\EngineLoop.h" />
     <ClInclude Include="Source\Runtime\Launch\Public\GameEngine.h" />
+    <ClInclude Include="Source\Runtime\Object\Public\Level.h" />
     <ClInclude Include="Source\ThirdParty\imgui\Public\imconfig.h" />
     <ClInclude Include="Source\ThirdParty\imgui\Public\imgui.h" />
     <ClInclude Include="Source\ThirdParty\imgui\Public\imgui_impl_sdl.h" />
@@ -395,6 +400,26 @@
     <ClInclude Include="Source\ThirdParty\imgui\Public\imstb_textedit.h" />
     <ClInclude Include="Source\ThirdParty\imgui\Public\imstb_truetype.h" />
     <ClInclude Include="Source\ThirdParty\imgui_sdl\Public\imgui_sdl.h" />
+    <ClInclude Include="Source\ThirdParty\rapidJSON\allocators.h" />
+    <ClInclude Include="Source\ThirdParty\rapidJSON\cursorstreamwrapper.h" />
+    <ClInclude Include="Source\ThirdParty\rapidJSON\document.h" />
+    <ClInclude Include="Source\ThirdParty\rapidJSON\encodedstream.h" />
+    <ClInclude Include="Source\ThirdParty\rapidJSON\encodings.h" />
+    <ClInclude Include="Source\ThirdParty\rapidJSON\filereadstream.h" />
+    <ClInclude Include="Source\ThirdParty\rapidJSON\filewritestream.h" />
+    <ClInclude Include="Source\ThirdParty\rapidJSON\fwd.h" />
+    <ClInclude Include="Source\ThirdParty\rapidJSON\istreamwrapper.h" />
+    <ClInclude Include="Source\ThirdParty\rapidJSON\memorybuffer.h" />
+    <ClInclude Include="Source\ThirdParty\rapidJSON\memorystream.h" />
+    <ClInclude Include="Source\ThirdParty\rapidJSON\ostreamwrapper.h" />
+    <ClInclude Include="Source\ThirdParty\rapidJSON\pointer.h" />
+    <ClInclude Include="Source\ThirdParty\rapidJSON\prettywriter.h" />
+    <ClInclude Include="Source\ThirdParty\rapidJSON\rapidjson.h" />
+    <ClInclude Include="Source\ThirdParty\rapidJSON\reader.h" />
+    <ClInclude Include="Source\ThirdParty\rapidJSON\schema.h" />
+    <ClInclude Include="Source\ThirdParty\rapidJSON\stream.h" />
+    <ClInclude Include="Source\ThirdParty\rapidJSON\stringbuffer.h" />
+    <ClInclude Include="Source\ThirdParty\rapidJSON\writer.h" />
     <ClInclude Include="Source\ThirdParty\SDL\Public\begin_code.h" />
     <ClInclude Include="Source\ThirdParty\SDL\Public\close_code.h" />
     <ClInclude Include="Source\ThirdParty\SDL\Public\SDL.h" />

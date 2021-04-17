@@ -11,6 +11,7 @@ class CEditorEngine : public CEngine
 	DECLARE_CLASS(CEditorEngine, CEngine)
 
 public:
+	CEditorEngine();
 
 	virtual bool Init() override;
 
@@ -22,5 +23,20 @@ public:
 	virtual void EditorUI(float DeltaTime) override;
 
 	virtual void HandleInput(const SDL_Event& Event) override;
+
+protected:
+	void Test();
+	// UI BEGIN
+
+	void ShowMenuBar();
+	void ShowMenuFile();
+
+	void ShowAddObject();
+	void ShowLevelView();
+
+	bool bShowAddObject;
+	bool bShowLevelView;
+
+	// UI END
 };
 #endif

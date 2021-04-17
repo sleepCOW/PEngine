@@ -4,30 +4,24 @@
 
 void CObjectManager::AddObject(CObject* NewObject)
 {
-	Objects.push_back(std::make_shared<CObject>(NewObject));
-}
+	assert(NewObject);
 
-void CObjectManager::AddObject(SPtr<CObject> NewObject)
-{
 	Objects.push_back(NewObject);
 }
 
 void CObjectManager::AddRenderComponent(CRenderComponent* NewObject)
 {
-	RenderComponents.push_back(std::static_pointer_cast<CRenderComponent>(NewObject->GetShared()));
-}
+	assert(NewObject);
 
-void CObjectManager::AddRenderComponent(SPtr<CRenderComponent> NewObject)
-{
 	RenderComponents.push_back(NewObject);
 }
 
-Vector<SPtr<CObject>>& CObjectManager::GetObjects()
+Vector<CObject*>& CObjectManager::GetObjects()
 {
 	return Objects;
 }
 
-List<SPtr<CRenderComponent>>& CObjectManager::GetRenderComponents()
+List<CRenderComponent*>& CObjectManager::GetRenderComponents()
 {
 	return RenderComponents;
 }

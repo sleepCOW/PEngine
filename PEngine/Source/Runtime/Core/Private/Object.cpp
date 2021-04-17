@@ -3,12 +3,8 @@
 
 DEFINE_META(CObject)
 
-CObject::CObject(CObject* ThisOwner)
+CObject::CObject(CObject* ThisOwner) : Owner(ThisOwner)
 {
-	if (ThisOwner)
-	{
-		Owner = ThisOwner->GetShared();
-	}
 }
 
 CObject::~CObject()
@@ -39,25 +35,16 @@ void CObject::Tick(float DeltaTime)
 
 void CObject::AddComponent(CComponent* Component)
 {
-	Components.push_back(Component->GetComponentShared());
-}
+	assert(Component != nullptr);
 
-void CObject::AddComponent(SPtr<CComponent> Component)
-{
 	Components.push_back(Component);
 }
-
-SPtr<CObject> CObject::GetShared()
-{
-	return shared_from_this();
-}
-
-SPtr<const CObject> CObject::GetShared() const
-{
-	return shared_from_this();
-}
-
-Vector<SPtr<CComponent>>& CObject::GetComponents()
+Vector<CComponent*>& CObject::GetComponents()
 {
 	return Components;
+}
+
+rapidjson::Value CObject::Serialize()
+{
+
 }

@@ -7,6 +7,9 @@
 extern struct SDL_Renderer* GRenderer;
 extern struct SDL_Window* GMainWindow;
 
+/** Global engine loop object. */
+extern class CEngine* GEngineLoop;
+
 extern bool GIsRequestingExit;
 extern bool GEngineInitialized;
 

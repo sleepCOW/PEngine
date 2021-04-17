@@ -1,9 +1,10 @@
 #pragma once
 
 #include "Engine/Public/PEngine.h"
-#include "Core/Public/CoreDefines.h"
 #include "Core/Public/CoreMemory.h"
+#include "Core/Public/CoreDefines.h"
 #include "Core/Public/ObjectManager.h"
+#include "Core/Public/ReflectionManager.h"
 
 typedef union SDL_Event SDL_Event;
 class CObjectManager;
@@ -43,36 +44,3 @@ protected:
 };
 
 int Run(CEngine* EngineLoop);
-
-/** Global engine loop object. */
-extern class CEngine* GEngineLoop;
-
-// Create new object in runtime/editor
-template <typename T>
-T* NewObject(CObject* Owner)
-{
-	CObjectManager* ObjectManager = GEngineLoop->GetObjectManager();
-
-	SPtr<CObject> CreatedObject = std::make_shared<T>(Owner);
-
-	CreatedObject->PreInit();
-	
-	ObjectManager->AddObject(CreatedObject);
-
-	return CreatedObject.get();
-}
-
-template <typename T>
-T* NewComponent(CObject* Owner)
-{
-	SPtr<CComponent> CreatedComponent = std::make_shared<T>(Owner);
-
-	if (Owner)
-	{
-		Owner->AddComponent(CreatedComponent);
-	}
-
-	CreatedComponent->PreInit();
-
-	return CreatedComponent.get();
-}

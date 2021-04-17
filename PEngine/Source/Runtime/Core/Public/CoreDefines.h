@@ -26,7 +26,7 @@
 
 #ifdef WITH_EDITOR
 #define DEFINE_META(ClassName) \
-	CReflectionData ClassName::ReflectionData = CReflectionData(#ClassName, std::is_base_of<CComponent, ClassName>::value);
+	CReflectionData ClassName::ReflectionData = CReflectionData(#ClassName, std::is_base_of<CComponent, ClassName>::value, &NewObject<ClassName>);
 #else
 #define DEFINE_META(ClassName)
 #endif

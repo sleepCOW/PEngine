@@ -1,18 +1,21 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "Launch/Public/EngineLoop.h"
+#include "rapidJSON/document.h"
 
 class CComponent;
+class CRenderComponent;
 
 /**
  * Base class for ?
  */
-class CObject : std::enable_shared_from_this<CObject>
+class CObject
 {
 	DECLARE_CLASS(CObject, CObject)
 
 public:
-	CObject(CObject* ThisOwner);
+	CObject(CObject* ThisOwner = nullptr);
 	virtual ~CObject();
 
 	/** Triggers when object is created during runtime */
@@ -25,20 +28,55 @@ public:
 	virtual void Tick(float DeltaTime);
 
 	void AddComponent(CComponent* Component);
-	void AddComponent(SPtr<CComponent> Component);
 
 	/** Helper functions */
-	SPtr<CObject> GetShared();
-	SPtr<const CObject> GetShared() const;
-	Vector<SPtr<CComponent>>& GetComponents();
+	Vector<CComponent*>& GetComponents();
+
+	virtual rapidjson::Value Serialize();
+	rapidjson::Value Deserialize();
 
 	/** Whether this object is active and ticking */
 	bool bActive;
 
 protected:
 	/** Owner of this component */
-	WeakPtr<CObject> Owner;
+	CObject* Owner;
 
-	Vector<SPtr<CComponent>> Components;
-
+	Vector<CComponent*> Components;
 };
+
+// Create new object in runtime/editor
+template <typename T>
+CObject* NewObject(CObject* Owner)
+{
+	CObjectManager* ObjectManager = GEngineLoop->GetObjectManager();
+
+	CObject* CreatedObject = new T(Owner);
+
+	bool bIsObject = false;
+	if constexpr (std::is_base_of<CComponent, T>::value)
+	{
+		if constexpr (std::is_base_of<CRenderComponent, T>::value)
+		{
+			ObjectManager->AddRenderComponent(static_cast<CRenderComponent*>(CreatedObject));
+		}
+
+		if (Owner)
+		{
+			Owner->AddComponent(static_cast<CComponent*>(CreatedObject));
+		}
+	}
+	else
+	{
+		bIsObject = true;
+	}
+
+	CreatedObject->PreInit();
+
+	if (bIsObject)
+	{
+		ObjectManager->AddObject(CreatedObject);
+	}
+
+	return CreatedObject;
+}
