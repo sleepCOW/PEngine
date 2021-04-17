@@ -92,30 +92,31 @@ int Run(CEngine* EngineLoop)
 {
 	SDL_Event Event;
 	SWindowParam WindowParam;
-	uint32_t flags;
+	uint32_t WindowFlags;
 
 	EngineLoop->PreInit(WindowParam);
 
-	flags = SDL_WINDOW_SHOWN;
+	WindowFlags = SDL_WINDOW_SHOWN;
+	WindowFlags |= SDL_WINDOW_RESIZABLE;
 	if (WindowParam.bFullscreen) {
 		SDL_ShowCursor(0);
-		flags |= SDL_WINDOW_FULLSCREEN;
+		WindowFlags |= SDL_WINDOW_FULLSCREEN;
 	}
 
 	if (SDL_Init(SDL_INIT_EVERYTHING) == -1) {
-		fprintf(stderr, "SDL_Init(SDL_INIT_VIDEO) failed: %s\n", SDL_GetError());
+		fprintf(stdout, "SDL_Init(SDL_INIT_VIDEO) failed: %s\n", SDL_GetError());
 		return(2);
 	}
 
-	GMainWindow = SDL_CreateWindow(WindowParam.WindowTitle.data(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WindowParam.Width, WindowParam.Height, flags);
+	GMainWindow = SDL_CreateWindow(WindowParam.WindowTitle.data(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WindowParam.Width, WindowParam.Height, WindowFlags);
 	if (!GMainWindow) {
-		fprintf(stderr, "SDL_CreateWindow() failed: %s\n", SDL_GetError());
+		fprintf(stdout, "SDL_CreateWindow() failed: %s\n", SDL_GetError());
 		return false;
 	}
 
 	GRenderer = CreateOpenGLRenderer(GMainWindow);
 	if (!GRenderer) {
-		fprintf(stderr, "SDL_CreateRenderer() failed: %s\n", SDL_GetError());
+		fprintf(stdout, "SDL_CreateRenderer() failed: %s\n", SDL_GetError());
 		return false;
 	}
 
@@ -124,7 +125,7 @@ int Run(CEngine* EngineLoop)
 
 		if (!EngineLoop->Init())
 		{
-			fprintf(stderr, "EngineLoop::Init failed\n");
+			fprintf(stdout, "EngineLoop::Init failed\n");
 			SDL_Quit();
 			exit(1);
 		}

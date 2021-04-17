@@ -11,6 +11,7 @@ class CEditorEngine : public CEngine
 	DECLARE_CLASS(CEditorEngine, CEngine)
 
 public:
+	CEditorEngine();
 
 	virtual bool Init() override;
 
@@ -31,8 +32,10 @@ protected:
 	void ShowMenuFile();
 
 	void ShowAddObject();
+	void ShowLevelView();
 
 	bool bShowAddObject;
+	bool bShowLevelView;
 
 	// UI END
 };

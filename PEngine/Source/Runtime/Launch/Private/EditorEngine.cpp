@@ -14,6 +14,12 @@
 #pragma init_seg(compiler)
 CReflectionManager ReflectionManager;
 
+CEditorEngine::CEditorEngine()
+{
+	bShowAddObject = false;
+	bShowLevelView = true;
+}
+
 bool CEditorEngine::Init()
 {
 	Super::Init();
@@ -84,6 +90,7 @@ void CEditorEngine::EditorUI(float DeltaTime)
 	ShowMenuBar();
 	
 	if (bShowAddObject) ShowAddObject();
+	if (bShowLevelView) ShowLevelView();
 
 	/** #TODO: Remove demo window */
 	ImGui::ShowDemoWindow();
@@ -152,6 +159,51 @@ void CEditorEngine::ShowAddObject()
 		CObject* NewObj = ReflectionManager.CreateObject(AllObjects[Selected], nullptr);
 		// Reset selected object
 		Selected = 0;
+	}
+
+	ImGui::End();
+}
+
+void CEditorEngine::ShowLevelView()
+{
+	ImGui::Begin("Level view", &bShowLevelView);
+
+	ImGui::LabelText("TODO", "Level name: ");
+
+	ImGui::Text("Level view:");
+	//ImGui::Alig
+
+	if (ImGui::TreeNode("Tree top"))
+	{
+		
+
+		if (ImGui::TreeNode("1st level"))
+		{
+			ImGui::Text("blabla");
+
+			ImGui::TreePop();
+		}
+
+		ImGui::TreePop();
+	}
+	ImGui::SameLine();
+	if (ImGui::SmallButton("Select"))
+	{
+	}
+	if (ImGui::TreeNode("Tree top 2"))
+	{
+		if (ImGui::TreeNode("1st level"))
+		{
+			ImGui::Text("blabla");
+
+			ImGui::TreePop();
+		}
+
+		ImGui::TreePop();
+	}
+	ImGui::SameLine();
+	if (ImGui::SmallButton("Select"))
+	{
 	}
 
 	ImGui::End();
