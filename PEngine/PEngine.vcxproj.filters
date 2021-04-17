@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?> 
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <Filter Include="Source">
@@ -58,17 +58,6 @@
     <Filter Include="Source\Runtime\Component\Private">
       <UniqueIdentifier>{66972b0b-14cf-4ea0-be5c-64acdb08d13d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source\ThirdParty\RapidJSON">
-      <UniqueIdentifier>{e31bbd07-667d-4fa1-9d4a-a659548057dd}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source\ThirdParty\RapidJSON\error">
-      <UniqueIdentifier>{a038e9aa-0062-443d-892d-27104409429c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source\ThirdParty\RapidJSON\internal">
-      <UniqueIdentifier>{3e26910a-b819-49ba-93cf-31f16c4ee921}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source\ThirdParty\RapidJSON\msinttypes">
-      <UniqueIdentifier>{9918de90-239d-42a5-aee3-653fb51296c9}</UniqueIdentifier>
     <Filter Include="Source\Runtime\Object">
       <UniqueIdentifier>{0f381b77-a533-4c66-8ea1-546d49f68865}</UniqueIdentifier>
     </Filter>
@@ -77,6 +66,9 @@
     </Filter>
     <Filter Include="Source\Runtime\Object\Private">
       <UniqueIdentifier>{f8107419-844a-4b47-8ac5-2d04b3421f97}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\ThirdParty\rapidJSON">
+      <UniqueIdentifier>{1f34655f-ff8b-4919-90a8-954a2069f2f2}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
