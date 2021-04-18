@@ -173,6 +173,8 @@
       <CompileAsWinRT>false</CompileAsWinRT>
       <AdditionalIncludeDirectories>$(SolutionDir)PEngine\Source\Runtime;$(SolutionDir)PEngine\Source\ThirdParty;$(SolutionDir)PEngine\Source\Editor;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -190,6 +192,8 @@
       <CompileAsWinRT>false</CompileAsWinRT>
       <AdditionalIncludeDirectories>$(SolutionDir)PEngine\Source\Runtime;$(SolutionDir)PEngine\Source\ThirdParty;$(SolutionDir)PEngine\Source\Editor;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -209,6 +213,8 @@
       <CompileAsWinRT>false</CompileAsWinRT>
       <AdditionalIncludeDirectories>$(SolutionDir)PEngine\Source\Runtime;$(SolutionDir)PEngine\Source\ThirdParty;$(SolutionDir)PEngine\Source\Editor;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -230,6 +236,8 @@
       <CompileAsWinRT>false</CompileAsWinRT>
       <AdditionalIncludeDirectories>$(SolutionDir)PEngine\Source\Runtime;$(SolutionDir)PEngine\Source\ThirdParty;$(SolutionDir)PEngine\Source\Editor;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -249,6 +257,8 @@
       <CompileAsWinRT>false</CompileAsWinRT>
       <AdditionalIncludeDirectories>$(SolutionDir)PEngine\Source\Runtime;$(SolutionDir)PEngine\Source\ThirdParty;$(SolutionDir)PEngine\Source\Editor;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -266,6 +276,8 @@
       <CompileAsWinRT>false</CompileAsWinRT>
       <AdditionalIncludeDirectories>$(SolutionDir)PEngine\Source\Runtime;$(SolutionDir)PEngine\Source\ThirdParty;$(SolutionDir)PEngine\Source\Editor;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -285,6 +297,8 @@
       <CompileAsWinRT>false</CompileAsWinRT>
       <AdditionalIncludeDirectories>$(SolutionDir)PEngine\Source\Runtime;$(SolutionDir)PEngine\Source\ThirdParty;$(SolutionDir)PEngine\Source\Editor;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -306,6 +320,8 @@
       <CompileAsWinRT>false</CompileAsWinRT>
       <AdditionalIncludeDirectories>$(SolutionDir)PEngine\Source\Runtime;$(SolutionDir)PEngine\Source\ThirdParty;$(SolutionDir)PEngine\Source\Editor;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -319,8 +335,10 @@
   <ItemGroup>
     <ClCompile Include="Source\Runtime\Component\Private\RenderComponent.cpp" />
     <ClCompile Include="Source\Runtime\Component\Private\SpriteComponent.cpp" />
+    <ClCompile Include="Source\Runtime\Core\Private\Actor.cpp" />
     <ClCompile Include="Source\Runtime\Core\Private\AssetManager.cpp" />
     <ClCompile Include="Source\Runtime\Core\Private\Component.cpp" />
+    <ClCompile Include="Source\Runtime\Core\Private\ConfReader.cpp" />
     <ClCompile Include="Source\Runtime\Core\Private\CoreGlobals.cpp" />
     <ClCompile Include="Source\Runtime\Core\Private\CoreMemory.cpp" />
     <ClCompile Include="Source\Runtime\Core\Private\Object.cpp" />
@@ -341,8 +359,10 @@
   <ItemGroup>
     <ClInclude Include="Source\Runtime\Component\Public\RenderComponent.h" />
     <ClInclude Include="Source\Runtime\Component\Public\SpriteComponent.h" />
+    <ClInclude Include="Source\Runtime\Core\Public\Actor.h" />
     <ClInclude Include="Source\Runtime\Core\Public\AssetManager.h" />
     <ClInclude Include="Source\Runtime\Core\Public\Component.h" />
+    <ClInclude Include="Source\Runtime\Core\Public\ConfReader.h" />
     <ClInclude Include="Source\Runtime\Core\Public\CoreDefines.h" />
     <ClInclude Include="Source\Runtime\Core\Public\CoreMemory.h" />
     <ClInclude Include="Source\Runtime\Core\Public\CoreMinimal.h" />

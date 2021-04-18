@@ -33,6 +33,19 @@ using WPtr = std::weak_ptr<T>;
 template<class T, class Allocator = std::allocator<T>>
 using Vector = std::vector<T, Allocator>;
 
+/**
+ * Containers helper functions
+ */
+namespace CHelpers
+{
+	/**
+	 * Return last element of the STL container
+	 * @return Reference to the last element
+	 */
+	template <typename T>
+	T& GetLast(T& Container) { return Container[Container.size() - 1]; }
+}
+
 template<class T, class Allocator = std::allocator<T>>
 using List = std::list<T, Allocator>;
 

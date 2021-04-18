@@ -132,6 +132,12 @@
     <ClCompile Include="Source\Runtime\Object\Private\Level.cpp">
       <Filter>Source\Runtime\Object\Private</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Runtime\Core\Private\ConfReader.cpp">
+      <Filter>Source\Runtime\Core\Private</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Runtime\Core\Private\Actor.cpp">
+      <Filter>Source\Runtime\Core\Private</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Runtime\Core\Public\CoreMinimal.h">
@@ -523,6 +529,12 @@
     </ClInclude>
     <ClInclude Include="Source\Runtime\Interface\ISerializable.h">
       <Filter>Source\Runtime\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Runtime\Core\Public\ConfReader.h">
+      <Filter>Source\Runtime\Core\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Runtime\Core\Public\Actor.h">
+      <Filter>Source\Runtime\Core\Public</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -26,6 +26,9 @@ void RedirectIOToConsole()
 	std::ios::sync_with_stdio();
 }
 
+
+#include <cstdio>
+
 int WINAPI WinMain(_In_ HINSTANCE hInInstance, _In_opt_ HINSTANCE hPrevInstance, _In_ char*, _In_ int nCmdShow)
 {
 	RedirectIOToConsole();

@@ -32,7 +32,7 @@ int CConfReader::GetIntFrom(const String& ValueName, rapidjson::Document& JsonDo
 	int Result = JsonDocument[ValueName.data()].GetInt();
 
 #ifdef DEBUG_JSON
-	fprintf(stdout, "CConfReader::GetStringFrom, \"%s\" = \"%d\"", ValueName.data(), Result);
+	fprintf(stdout, "CConfReader::GetStringFrom, \"%s\" = \"%d\"\n", ValueName.data(), Result);
 #endif
 
 	return Result;
@@ -48,7 +48,7 @@ String CConfReader::GetStringFrom(const String& ValueName, rapidjson::Document& 
 	String Result = JsonDocument[ValueName.data()].GetString();
 
 #ifdef DEBUG_JSON
-	fprintf(stdout, "CConfReader::GetStringFrom, \"%s\" = \"%s\"", ValueName.data(), Result.data());
+	fprintf(stdout, "CConfReader::GetStringFrom, \"%s\" = \"%s\"\n", ValueName.data(), Result.data());
 #endif
 
 	return Result;
@@ -56,13 +56,14 @@ String CConfReader::GetStringFrom(const String& ValueName, rapidjson::Document& 
 
 CConfReader::SFile* CConfReader::OpenJSON(const String& Path, bool bCreateIfNull /*= false*/)
 {
+	// #TODO sleepCOW: Add check whether such file was already opened!
 	assert(Path.size() != 0);
 
 	FILE* FileHandle = nullptr;
 	fopen_s(&FileHandle, Path.data(), "r+");
 	if (!FileHandle)
 	{
-		fprintf(stdout, "CConfReader::OpenJSON Couldn't open file %s for Read/Write access!", Path.data());
+		fprintf(stdout, "CConfReader::OpenJSON Couldn't open file %s for Read/Write access!\n", Path.data());
 
 		if (bCreateIfNull)
 		{
@@ -70,7 +71,7 @@ CConfReader::SFile* CConfReader::OpenJSON(const String& Path, bool bCreateIfNull
 		}
 		return nullptr;
 	}
-	fprintf(stdout, "CConfReader::OpenJSON Opened file %s for Read/Write access!", Path.data());
+	fprintf(stdout, "CConfReader::OpenJSON Opened file %s for Read/Write access!\n", Path.data());
 
 	char ReadBuffer[BufferSize];
 	FileReadStream Is(FileHandle, ReadBuffer, BufferSize);
@@ -93,13 +94,20 @@ CConfReader::SFile* CConfReader::CreateJSON(const String& Path)
 
 	if (!FileHandle)
 	{
-		fprintf(stdout, "CConfReader::CreateJSON Couldn't create file %s for Read/Write access!", Path.data());
+		fprintf(stdout, "CConfReader::CreateJSON Couldn't create file %s for Read/Write access!\n", Path.data());
 		return nullptr;
 	}
-	fprintf(stdout, "CConfReader::CreateJSON Created file %s for Read/Write access!", Path.data());
+	fprintf(stdout, "CConfReader::CreateJSON Created file %s for Read/Write access!\n", Path.data());
 
 	OpenedFiles.push_back({ FileHandle, Document() });
 	return &OpenedFiles.back();
+}
+
+void CConfReader::SaveJSON(const String& Path, rapidjson::Document& JsonDocument)
+{
+	SFile* File = OpenJSON(Path, true);
+	File->Json = std::move(JsonDocument);
+	SaveJSON(File->Handle, JsonDocument);
 }
 
 void CConfReader::SaveJSON(FILE* FileHandle, rapidjson::Document& JsonDocument)

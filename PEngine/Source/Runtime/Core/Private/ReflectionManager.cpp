@@ -27,6 +27,14 @@ void CReflectionManager::AddToTypeMap(const String& ClassName, NewObjectFunc Fun
 	ObjectTypeMap[ClassName] = Function;
 }
 
+void CReflectionManager::AddToTypeMap(const String& ClassName, NewActorFunc Function)
+{
+	// This function must not be called twice for single class!
+	assert(ActorTypeMap.find(ClassName) == ActorTypeMap.end());
+
+	ActorTypeMap[ClassName] = Function;
+}
+
 Vector<String>& CReflectionManager::GetObjects()
 {
 	return Objects;
@@ -44,7 +52,14 @@ CObject* CReflectionManager::CreateObject(const String& ObjectName, CObject* Own
 	return ObjectTypeMap[ObjectName](Owner);
 }
 
-CReflectionData::CReflectionData(const String& ClassName, bool bComponent, NewObjectFunc Function)
+void CReflectionManager::CreateActor(const String& ObjectName, CLevel* Owner)
+{
+	assert(ObjectTypeMap.find(ObjectName) != ObjectTypeMap.end());
+
+	return ActorTypeMap[ObjectName](Owner);
+}
+
+CReflectionData::CReflectionData(const String& ClassName, bool bComponent, NewObjectFunc Function, NewActorFunc ActorFunction)
 {
 	if (bComponent)
 	{
@@ -56,6 +71,7 @@ CReflectionData::CReflectionData(const String& ClassName, bool bComponent, NewOb
 	}
 
 	ReflectionManager.AddToTypeMap(ClassName, Function);
+	ReflectionManager.AddToTypeMap(ClassName, ActorFunction);
 }
 
 #endif

@@ -17,6 +17,13 @@
 class CObject;
 class CComponent;
 class CObjectManager;
+class CLevel;
+
+/**
+* Paths
+*/
+
+#define CONFIGURATION_PATH "./Configuration.json"
 
 /**
 * Typedefs

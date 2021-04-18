@@ -5,9 +5,11 @@
 #include "Core/Public/CoreDefines.h"
 #include "Core/Public/ObjectManager.h"
 #include "Core/Public/ReflectionManager.h"
+#include "Core/Public/ConfReader.h"
 
 typedef union SDL_Event SDL_Event;
 class CObjectManager;
+class CLevel;
 
 /**
  * Implements the main engine loop.
@@ -18,6 +20,7 @@ class CEngine
 {
 	DECLARE_CLASS(CEngine, IEngineLoop)
 public:
+	CEngine();
 
 	// no function calls are available here, this function should only return width, height and fullscreen values
 	virtual void PreInit(SWindowParam& OutWindowParam) override;
@@ -36,11 +39,14 @@ public:
 
 	/** Access Helpers */
 	CObjectManager* GetObjectManager() const;
-
-public:
+	CConfReader* GetConfReader() const;
+	CLevel* GetLevel() const { return CurrentLevel; }
 
 protected:
 	UPtr<CObjectManager> ObjectManager;
+	UPtr<CConfReader> ConfReader;
+
+	CLevel* CurrentLevel;
 };
 
 int Run(CEngine* EngineLoop);

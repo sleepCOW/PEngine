@@ -4,12 +4,12 @@
 #include "Core/Public/CoreMinimal.h"
 #include "Core/Public/ObjectManager.h"
 #include "Core/Public/ReflectionManager.h"
+#include "Object/Public/Level.h"
 
 #include "imgui/Public/imgui.h"
 #include "imgui/Public/imgui_impl_sdl.h"
 #include "imgui_sdl/Public/imgui_sdl.h"
 #include "SDL2/Public/SDL.h"
-
 /** sleepCOW: make sure ReflectionManager is created among first created objects */
 #pragma init_seg(compiler)
 CReflectionManager ReflectionManager;
@@ -155,10 +155,8 @@ void CEditorEngine::ShowAddObject()
 
 	if (ImGui::Button("Create")) 
 	{
-		// #TODO sleepCOW: NewObj should be added to some sort of world
-		CObject* NewObj = ReflectionManager.CreateObject(AllObjects[Selected], nullptr);
+		ReflectionManager.CreateActor(AllObjects[Selected], GEngineLoop->GetLevel());
 		// Reset selected object
-		Selected = 0;
 	}
 
 	ImGui::End();
@@ -168,42 +166,20 @@ void CEditorEngine::ShowLevelView()
 {
 	ImGui::Begin("Level view", &bShowLevelView);
 
-	ImGui::LabelText("TODO", "Level name: ");
+	ImGui::LabelText(GetLevel()->GetName().data(), "Level name: ");
 
 	ImGui::Text("Level view:");
-	//ImGui::Alig
 
-	if (ImGui::TreeNode("Tree top"))
+	for (auto& Object : GEngineLoop->GetLevel()->GetObjects())
 	{
-		
-
-		if (ImGui::TreeNode("1st level"))
+		if (ImGui::TreeNode(Object->GetClassName()))
 		{
-			ImGui::Text("blabla");
-
 			ImGui::TreePop();
 		}
-
-		ImGui::TreePop();
-	}
-	ImGui::SameLine();
-	if (ImGui::SmallButton("Select"))
-	{
-	}
-	if (ImGui::TreeNode("Tree top 2"))
-	{
-		if (ImGui::TreeNode("1st level"))
+		ImGui::SameLine();
+		if (ImGui::SmallButton("Select"))
 		{
-			ImGui::Text("blabla");
-
-			ImGui::TreePop();
 		}
-
-		ImGui::TreePop();
-	}
-	ImGui::SameLine();
-	if (ImGui::SmallButton("Select"))
-	{
 	}
 
 	ImGui::End();

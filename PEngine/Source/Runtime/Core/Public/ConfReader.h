@@ -46,6 +46,14 @@ public:
 	 */
 	SFile* CreateJSON(const String& Path);
 
+	/**
+	 * Save json document to the provided path
+	 */
+	void SaveJSON(const String& Path, rapidjson::Document& JsonDocument);
+
+	/**
+	 * Save given json to provided file handle
+	 */
 	void SaveJSON(FILE* FileHandle, rapidjson::Document& JsonDocument);
 
 protected:

@@ -13,10 +13,16 @@
 #include "imgui/Public/imgui.h"
 #include "imgui/Public/imgui_impl_sdl.h"
 #include "imgui_sdl/Public/imgui_sdl.h"
+#include "Object/Public/Level.h"
 
 // Global variables definition
 SDL_Renderer* GRenderer;
 SDL_Window* GMainWindow;
+
+CEngine::CEngine()
+{
+	CurrentLevel = nullptr;
+}
 
 void CEngine::PreInit(SWindowParam& OutWindowParam)
 {
@@ -29,6 +35,19 @@ void CEngine::PreInit(SWindowParam& OutWindowParam)
 bool CEngine::Init()
 {
 	ObjectManager = std::make_unique<CObjectManager>();
+	ConfReader = std::make_unique<CConfReader>();
+
+	CurrentLevel = static_cast<CLevel*>(NewObject<CLevel>(nullptr));
+
+	String Level = ConfReader->GetString("StartupLevel");
+	if (!Level.empty())
+	{
+		CurrentLevel->LoadFromJson(Level);
+	}
+	else
+	{
+		CurrentLevel->NewLevel();
+	}
 
 	return true;
 }
@@ -69,6 +88,11 @@ void CEngine::HandleInput(const SDL_Event& Event)
 CObjectManager* CEngine::GetObjectManager() const
 {
 	return ObjectManager.get();
+}
+
+CConfReader* CEngine::GetConfReader() const
+{
+	return ConfReader.get();
 }
 
 SDL_Renderer* CreateOpenGLRenderer(SDL_Window* Window)

@@ -1,8 +1,7 @@
 #pragma once
 
-#include "CoreMinimal.h"
 #include "Launch/Public/EngineLoop.h"
-#include "rapidJSON/document.h"
+#include <type_traits>
 
 class CComponent;
 class CRenderComponent;
@@ -32,15 +31,14 @@ public:
 	/** Helper functions */
 	Vector<CComponent*>& GetComponents();
 
-	virtual rapidjson::Value Serialize();
-	rapidjson::Value Deserialize();
-
 	/** Whether this object is active and ticking */
 	bool bActive;
 
 protected:
 	/** Owner of this component */
 	CObject* Owner;
+
+	String ObjectName;
 
 	Vector<CComponent*> Components;
 };

@@ -1,4 +1,5 @@
 #include "Component/Public/RenderComponent.h"
+#include "Object/Public/Level.h"
 
 DEFINE_META(CRenderComponent)
 
