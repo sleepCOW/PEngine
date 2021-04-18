@@ -44,6 +44,7 @@ void CObject::AddComponent(CComponent* Component)
 
 	Components.push_back(Component);
 }
+
 Vector<CComponent*>& CObject::GetComponents()
 {
 	return Components;

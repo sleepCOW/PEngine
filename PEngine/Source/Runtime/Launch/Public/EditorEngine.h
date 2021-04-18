@@ -34,12 +34,14 @@ protected:
 	void ShowMenuFile();
 
 	void ShowAddObject();
+	void ShowAddComponent();
 	void ShowLevelView();
 	void ShowCreateClass();
 	void ShowObjectEdit();
 	void ShowField(SField& Field);
 
 	bool bShowAddObject;
+	bool bShowAddComponent;
 	bool bShowCreateClass;
 	bool bShowLevelView;
 

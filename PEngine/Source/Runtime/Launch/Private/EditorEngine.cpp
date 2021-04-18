@@ -11,14 +11,22 @@
 #include "imgui/Public/imgui_stdlib.h"
 #include "imgui_sdl/Public/imgui_sdl.h"
 #include "SDL2/Public/SDL.h"
+#include "Core/Public/Component.h"
+
 /** sleepCOW: make sure ReflectionManager is created among first created objects */
 #pragma init_seg(compiler)
 CReflectionManager ReflectionManager;
+
+static ImVec2 WindowWidth()
+{
+	return ImVec2(ImGui::GetWindowWidth() * 0.96f, 0.f);
+}
 
 CEditorEngine::CEditorEngine()
 {
 	bShowAddObject = false;
 	bShowCreateClass = false;
+	bShowAddComponent = false;
 	bShowLevelView = true;
 	SelectedObject = nullptr;
 }
@@ -99,6 +107,7 @@ void CEditorEngine::EditorUI(float DeltaTime)
 	if (bShowAddObject) ShowAddObject();
 	if (bShowLevelView) ShowLevelView();
 	if (bShowCreateClass) ShowCreateClass();
+	if (bShowAddComponent) ShowAddComponent();
 
 	/** #TODO: Remove demo window */
 	ImGui::ShowDemoWindow();
@@ -141,7 +150,7 @@ void CEditorEngine::ShowMenuFile()
 
 void CEditorEngine::ShowAddObject()
 {
-	ImGui::Begin("Select object to create", &bShowAddObject);
+	ImGui::Begin("Add object to the level", &bShowAddObject);
 
 	Vector<String>& AllObjects = ReflectionManager.GetObjects();
 	assert(AllObjects.size()); // At least CObject should exist!
@@ -161,10 +170,39 @@ void CEditorEngine::ShowAddObject()
 		ImGui::EndCombo();
 	}
 
-	if (ImGui::Button("Create")) 
+	if (ImGui::Button("Create", WindowWidth())) 
 	{
 		ReflectionManager.CreateActor(AllObjects[Selected], GEngineLoop->GetLevel());
 		// Reset selected object
+	}
+
+	ImGui::End();
+}
+
+void CEditorEngine::ShowAddComponent()
+{
+	ImGui::Begin("Add Component", &bShowAddComponent);
+
+	Vector<String>& AllComponents = ReflectionManager.GetComponents();
+	assert(AllComponents.size()); // At least CObject should exist!
+
+	static int Selected = 0;
+	if (ImGui::BeginCombo("Component list", AllComponents[Selected].data()))
+	{
+		for (int i = 0; i < AllComponents.size(); ++i)
+		{
+			if (ImGui::Selectable(AllComponents[i].data()))
+			{
+				Selected = i;
+			}
+		}
+
+		ImGui::EndCombo();
+	}
+
+	if (ImGui::Button("Create", WindowWidth()))
+	{
+		ReflectionManager.CreateObject(AllComponents[Selected], SelectedObject);
 	}
 
 	ImGui::End();
@@ -183,22 +221,34 @@ void CEditorEngine::ShowLevelView()
 	{
 		CObject* Object = Objects[i];
 		ImGui::PushID(i);
-		if (ImGui::TreeNode(Object->GetObjectName().data()))
-		{
-			ImGui::TreePop();
-		}
-		ImGui::SameLine();
-		ImGui::Text("Class: %s", Object->GetClassName());
-		ImGui::SameLine();
 		if (ImGui::SmallButton("Select"))
 		{
 			SelectedObject = Object;
+		}
+		ImGui::SameLine();
+		if (ImGui::TreeNode((void*)(intptr_t)i, "%s Class: %s", Object->GetObjectName().data(), Object->GetClassName()))
+		{
+			Vector<CComponent*>& Components = Object->GetComponents();
+			for (int k = 0; k < Components.size(); ++k)
+			{
+				CComponent* Component = Components[k];
+
+				ImGui::PushID(k);
+				if (ImGui::SmallButton("Select")) 
+				{
+					SelectedObject = Component;
+				}
+				ImGui::SameLine();
+				ImGui::Text("%s Class: %s", Component->GetObjectName().data(), Component->GetClassName());
+				ImGui::PopID();
+			}
+
+			ImGui::TreePop();
 		}
 		ImGui::PopID();
 	}
 	ImGui::Separator();
 	
-
 	if (SelectedObject) { ShowObjectEdit(); }
 
 	ImGui::End();
@@ -221,6 +271,11 @@ void CEditorEngine::ShowObjectEdit()
 	for (SField& Field : SelectedObject->GetEditorFields())
 	{
 		ShowField(Field);
+	}
+
+	if (ImGui::Button("Add Component", WindowWidth()))
+	{
+		bShowAddComponent = true;
 	}
 }
 
