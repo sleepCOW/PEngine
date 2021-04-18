@@ -8,6 +8,7 @@
 
 #include "imgui/Public/imgui.h"
 #include "imgui/Public/imgui_impl_sdl.h"
+#include "imgui/Public/imgui_stdlib.h"
 #include "imgui_sdl/Public/imgui_sdl.h"
 #include "SDL2/Public/SDL.h"
 /** sleepCOW: make sure ReflectionManager is created among first created objects */
@@ -18,6 +19,7 @@ CEditorEngine::CEditorEngine()
 {
 	bShowAddObject = false;
 	bShowLevelView = true;
+	SelectedObject = nullptr;
 }
 
 bool CEditorEngine::Init()
@@ -170,19 +172,60 @@ void CEditorEngine::ShowLevelView()
 
 	ImGui::Text("Level view:");
 
-	for (auto& Object : GEngineLoop->GetLevel()->GetObjects())
+	Vector<CObject*>& Objects = GEngineLoop->GetLevel()->GetObjects();
+	for (int i = 0; i < Objects.size(); ++i)
 	{
-		if (ImGui::TreeNode(Object->GetClassName()))
+		CObject* Object = Objects[i];
+		ImGui::PushID(i);
+		if (ImGui::TreeNode(Object->GetObjectName().data()))
 		{
 			ImGui::TreePop();
 		}
 		ImGui::SameLine();
+		ImGui::Text("Class: %s", Object->GetClassName());
+		ImGui::SameLine();
 		if (ImGui::SmallButton("Select"))
 		{
+			SelectedObject = Object;
 		}
+		ImGui::PopID();
 	}
+	ImGui::Separator();
+	
+
+	if (SelectedObject) { ShowObjectEdit(); }
 
 	ImGui::End();
+}
+
+void CEditorEngine::ShowObjectEdit()
+{
+	assert(SelectedObject);
+	ImGui::Text("Object edit:");
+
+	for (SField& Field : SelectedObject->GetEditorFields())
+	{
+		ShowField(Field);
+	}
+}
+
+void CEditorEngine::ShowField(SField& Field)
+{
+	if (Field.FieldType == EFieldType::MATH_VECTOR)
+	{
+		SVector* FVector = reinterpret_cast<SVector*>(Field.PField);
+		ImGui::DragFloat("X", &FVector->X);
+		ImGui::DragFloat("Y", &FVector->Y);
+	}
+	else if (Field.FieldType == EFieldType::STRING)
+	{
+		String* FString = reinterpret_cast<String*>(Field.PField);
+
+		if (ImGui::InputText("String field", FString))
+		{
+
+		}
+	}
 }
 
 #endif

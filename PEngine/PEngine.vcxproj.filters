@@ -138,6 +138,9 @@
     <ClCompile Include="Source\Runtime\Core\Private\Actor.cpp">
       <Filter>Source\Runtime\Core\Private</Filter>
     </ClCompile>
+    <ClCompile Include="Source\ThirdParty\imgui\Public\imgui_stdlib.cpp">
+      <Filter>Source\ThirdParty\imgui\Public</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Runtime\Core\Public\CoreMinimal.h">
@@ -535,6 +538,12 @@
     </ClInclude>
     <ClInclude Include="Source\Runtime\Core\Public\Actor.h">
       <Filter>Source\Runtime\Core\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Runtime\Core\Public\CoreMath.h">
+      <Filter>Source\Runtime\Core\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ThirdParty\imgui\Public\imgui_stdlib.h">
+      <Filter>Source\ThirdParty\imgui\Public</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

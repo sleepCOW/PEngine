@@ -25,7 +25,9 @@ public:
 	virtual void HandleInput(const SDL_Event& Event) override;
 
 protected:
-	void Test();
+
+	CObject* SelectedObject;
+
 	// UI BEGIN
 
 	void ShowMenuBar();
@@ -33,6 +35,8 @@ protected:
 
 	void ShowAddObject();
 	void ShowLevelView();
+	void ShowObjectEdit();
+	void ShowField(SField& Field);
 
 	bool bShowAddObject;
 	bool bShowLevelView;

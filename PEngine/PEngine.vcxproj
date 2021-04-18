@@ -353,6 +353,7 @@
     <ClCompile Include="Source\ThirdParty\imgui\Public\imgui_demo.cpp" />
     <ClCompile Include="Source\ThirdParty\imgui\Public\imgui_draw.cpp" />
     <ClCompile Include="Source\ThirdParty\imgui\Public\imgui_impl_sdl.cpp" />
+    <ClCompile Include="Source\ThirdParty\imgui\Public\imgui_stdlib.cpp" />
     <ClCompile Include="Source\ThirdParty\imgui\Public\imgui_widgets.cpp" />
     <ClCompile Include="Source\ThirdParty\imgui_sdl\Public\imgui_sdl.cpp" />
   </ItemGroup>
@@ -364,6 +365,7 @@
     <ClInclude Include="Source\Runtime\Core\Public\Component.h" />
     <ClInclude Include="Source\Runtime\Core\Public\ConfReader.h" />
     <ClInclude Include="Source\Runtime\Core\Public\CoreDefines.h" />
+    <ClInclude Include="Source\Runtime\Core\Public\CoreMath.h" />
     <ClInclude Include="Source\Runtime\Core\Public\CoreMemory.h" />
     <ClInclude Include="Source\Runtime\Core\Public\CoreMinimal.h" />
     <ClInclude Include="Source\Runtime\Core\Public\CoreTypes.h" />
@@ -379,6 +381,7 @@
     <ClInclude Include="Source\ThirdParty\imgui\Public\imgui.h" />
     <ClInclude Include="Source\ThirdParty\imgui\Public\imgui_impl_sdl.h" />
     <ClInclude Include="Source\ThirdParty\imgui\Public\imgui_internal.h" />
+    <ClInclude Include="Source\ThirdParty\imgui\Public\imgui_stdlib.h" />
     <ClInclude Include="Source\ThirdParty\imgui\Public\imstb_rectpack.h" />
     <ClInclude Include="Source\ThirdParty\imgui\Public\imstb_textedit.h" />
     <ClInclude Include="Source\ThirdParty\imgui\Public\imstb_truetype.h" />

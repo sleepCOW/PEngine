@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Engine/Public/PEngine.h"
+#include "Core/Public/CoreTypes.h"
 #include "Core/Public/CoreMemory.h"
 #include "Core/Public/CoreDefines.h"
 #include "Core/Public/ObjectManager.h"
