@@ -57,6 +57,10 @@ void CEditorEngine::HandleInput(const SDL_Event& Event)
 	Super::HandleInput(Event);
 
 	ImGuiIO& InputOutput = ImGui::GetIO();
+	InputOutput.KeyMap[ImGuiKey_Backspace] = SDL_SCANCODE_BACKSPACE;
+	InputOutput.KeyMap[ImGuiKey_Delete] = SDL_SCANCODE_DELETE;
+	InputOutput.KeyMap[ImGuiKey_LeftArrow] = SDL_SCANCODE_LEFT;
+	InputOutput.KeyMap[ImGuiKey_RightArrow] = SDL_SCANCODE_RIGHT;
 	int Wheel = 0;
 
 	ImGui_ImplSDL2_ProcessEvent(&Event);
@@ -78,7 +82,7 @@ void CEditorEngine::HandleInput(const SDL_Event& Event)
 	const int buttons = SDL_GetMouseState(&mouseX, &mouseY);
 
 	// Setup low-level inputs (e.g. on Win32, GetKeyboardState(), or write to those fields from your Windows message loop handlers, etc.)
-	InputOutput.DeltaTime = 1.0f / 60.0f;
+	//InputOutput.DeltaTime = 1.0f / 120.0f;
 	InputOutput.MousePos = ImVec2(static_cast<float>(mouseX), static_cast<float>(mouseY));
 	InputOutput.MouseDown[0] = buttons & SDL_BUTTON(SDL_BUTTON_LEFT);
 	InputOutput.MouseDown[1] = buttons & SDL_BUTTON(SDL_BUTTON_RIGHT);
