@@ -1,7 +1,6 @@
 #pragma once
 
 #include "Launch/Public/EngineLoop.h"
-#include <type_traits>
 
 class CComponent;
 class CRenderComponent;
@@ -29,7 +28,24 @@ public:
 	void AddComponent(CComponent* Component);
 
 	/** Helper functions */
+	const String& GetObjectName() const { return ObjectName; }
 	Vector<CComponent*>& GetComponents();
+
+#ifdef WITH_EDITOR
+	Vector<SField>& GetEditorFields()
+	{
+		if (!bFilledEditorFields)
+		{
+			FillEditorFields();
+			bFilledEditorFields = true;
+		}
+		return EditorFields; 
+	};
+	virtual void FillEditorFields();
+
+	bool bFilledEditorFields = false;
+	Vector<SField> EditorFields;
+#endif
 
 	/** Whether this object is active and ticking */
 	bool bActive;

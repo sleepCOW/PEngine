@@ -7,3 +7,10 @@ CActor::CActor(CObject* ThisOwner /*= nullptr*/) : Super(ThisOwner)
 {
 
 }
+
+void CActor::FillEditorFields()
+{
+	Super::FillEditorFields();
+
+	EditorFields.push_back({ &Location, EFieldType::MATH_VECTOR});
+}

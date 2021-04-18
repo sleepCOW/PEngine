@@ -11,12 +11,15 @@ CObject::CObject(CObject* ThisOwner) : Owner(ThisOwner)
 
 CObject::~CObject()
 {
-
+	for (auto& Component : Components)
+	{
+		delete Component;
+	}
 }
 
 void CObject::PreInit()
 {
-	ObjectName = typeid(*this).name();
+	ObjectName = GetClassName();
 }
 
 void CObject::Init()
@@ -45,3 +48,10 @@ Vector<CComponent*>& CObject::GetComponents()
 {
 	return Components;
 }
+
+#ifdef WITH_EDITOR
+void CObject::FillEditorFields()
+{
+	EditorFields.push_back({ &ObjectName, EFieldType::STRING });
+}
+#endif

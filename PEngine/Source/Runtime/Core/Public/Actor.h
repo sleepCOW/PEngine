@@ -13,5 +13,11 @@ class CActor : public CObject
 public:
 	CActor(CObject* ThisOwner = nullptr);
 
+#ifdef WITH_EDITOR
+	virtual void FillEditorFields() override;
+#endif
+
 protected:
+
+	SVector Location;
 };
