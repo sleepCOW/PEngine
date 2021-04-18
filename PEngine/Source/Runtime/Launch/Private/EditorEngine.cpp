@@ -18,6 +18,7 @@ CReflectionManager ReflectionManager;
 CEditorEngine::CEditorEngine()
 {
 	bShowAddObject = false;
+	bShowCreateClass = false;
 	bShowLevelView = true;
 	SelectedObject = nullptr;
 }
@@ -97,6 +98,7 @@ void CEditorEngine::EditorUI(float DeltaTime)
 	
 	if (bShowAddObject) ShowAddObject();
 	if (bShowLevelView) ShowLevelView();
+	if (bShowCreateClass) ShowCreateClass();
 
 	/** #TODO: Remove demo window */
 	ImGui::ShowDemoWindow();
@@ -133,7 +135,7 @@ void CEditorEngine::ShowMenuFile()
 	if (ImGui::MenuItem("New project")) {}
 	if (ImGui::MenuItem("Open", "CTRL+O")) {}
 	ImGui::Separator();
-	if (ImGui::MenuItem("Create C++ Class")) {}
+	if (ImGui::MenuItem("Create C++ Class")) { bShowCreateClass = true; }
 	if (ImGui::MenuItem("Add object on scene")) { bShowAddObject = true; }
 }
 
@@ -198,6 +200,15 @@ void CEditorEngine::ShowLevelView()
 	
 
 	if (SelectedObject) { ShowObjectEdit(); }
+
+	ImGui::End();
+}
+
+void CEditorEngine::ShowCreateClass()
+{
+	ImGui::Begin("Create C++ Class", &bShowCreateClass);
+
+	// #TODO sleepCOW
 
 	ImGui::End();
 }

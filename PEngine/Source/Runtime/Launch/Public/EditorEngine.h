@@ -35,10 +35,12 @@ protected:
 
 	void ShowAddObject();
 	void ShowLevelView();
+	void ShowCreateClass();
 	void ShowObjectEdit();
 	void ShowField(SField& Field);
 
 	bool bShowAddObject;
+	bool bShowCreateClass;
 	bool bShowLevelView;
 
 	// UI END
