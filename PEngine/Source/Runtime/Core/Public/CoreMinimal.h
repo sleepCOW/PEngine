@@ -9,6 +9,7 @@
 #include "CoreMemory.h"
 #include "CoreDefines.h"
 #include "CoreGlobals.h"
+#include "CoreMath.h"
 
 /**
 * Forward declarations

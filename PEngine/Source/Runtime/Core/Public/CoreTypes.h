@@ -17,3 +17,21 @@ struct SWindowParam
 	int Height = 0;
 	bool bFullscreen = false;
 };
+
+#ifdef WITH_EDITOR
+enum class EFieldType
+{
+	NONE,
+	INT,
+	FLOAT,
+	STRING,
+	MATH_VECTOR,
+	PTR
+};
+
+struct SField
+{
+	void* PField;
+	EFieldType FieldType;
+};
+#endif WITH_EDITOR
