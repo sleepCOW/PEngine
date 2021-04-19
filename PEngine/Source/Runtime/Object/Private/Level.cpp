@@ -46,14 +46,19 @@ void CLevel::PreInit()
 
 void CLevel::Init()
 {
-	Super::PreInit();
+	Super::Init();
+
+	for (auto& Object : LevelObjects)
+	{
+		Object->Init();
+	}
 }
 
 void CLevel::Tick(float DeltaTime)
 {
 	for (auto& Object : LevelObjects)
 	{
-		if (Object->bActive)
+		if (Object->bTicking)
 		{
 			Object->Tick(DeltaTime);
 		}
