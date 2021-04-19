@@ -14,6 +14,7 @@
 #include "imgui/Public/imgui_impl_sdl.h"
 #include "imgui_sdl/Public/imgui_sdl.h"
 #include "Object/Public/Level.h"
+#include "Launch/Public/EditorEngine.h"
 
 // Global variables definition
 SDL_Renderer* GRenderer;
@@ -22,6 +23,7 @@ SDL_Window* GMainWindow;
 CEngine::CEngine()
 {
 	CurrentLevel = nullptr;
+	bGamePaused = false;
 }
 
 void CEngine::PreInit(SWindowParam& OutWindowParam)
@@ -59,18 +61,21 @@ void CEngine::Close()
 
 void CEngine::Tick(float DeltaTime)
 {
-	for (auto& Object : ObjectManager->GetObjects())
+	if (!bGamePaused)
 	{
-		if (Object->bActive)
+		for (auto& Object : ObjectManager->GetObjects())
 		{
-			Object->Tick(DeltaTime);
+			if (Object->bTicking)
+			{
+				Object->Tick(DeltaTime);
+			}
 		}
 	}
 
 	// Render part
 	for (auto& RenderComponent : ObjectManager->GetRenderComponents())
 	{
-		if (RenderComponent->bActive)
+		if (RenderComponent->bTicking)
 		{
 			RenderComponent->Draw();
 		}
@@ -165,7 +170,9 @@ int Run(CEngine* EngineLoop)
 			}
 
 			EngineLoop->Tick(DeltaTime);
-			EngineLoop->EditorUI(DeltaTime);
+#ifdef WITH_EDITOR
+			static_cast<CEditorEngine*>(EngineLoop)->EditorUI(DeltaTime);
+#endif
 
 			SDL_RenderPresent(GRenderer);
 			End = SDL_GetTicks();

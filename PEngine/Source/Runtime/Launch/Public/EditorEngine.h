@@ -19,10 +19,14 @@ public:
 
 	virtual void Tick(float DeltaTime) override;
 
-	// Editor UI implementation should exist only for EditorEngine
-	virtual void EditorUI(float DeltaTime) override;
+	void EditorUI(float DeltaTime);
 
 	virtual void HandleInput(const SDL_Event& Event) override;
+
+protected:
+
+	void PlayInEditor();
+	void StopPIE();
 
 protected:
 
@@ -39,6 +43,7 @@ protected:
 	void ShowCreateClass();
 	void ShowObjectEdit();
 	void ShowField(SField& Field);
+	void ShowPlayButtons();
 
 	bool bShowAddObject;
 	bool bShowAddComponent;

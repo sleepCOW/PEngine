@@ -28,6 +28,7 @@ CEditorEngine::CEditorEngine()
 	bShowCreateClass = false;
 	bShowAddComponent = false;
 	bShowLevelView = true;
+	bGamePaused = true;
 	SelectedObject = nullptr;
 }
 
@@ -43,6 +44,8 @@ bool CEditorEngine::Init()
 
 	ImGui::CreateContext();
 	ImGuiSDL::Initialize(GRenderer, Width, Height);
+
+	CurrentLevel->bTicking = false;
 
 	return true;
 }
@@ -114,6 +117,20 @@ void CEditorEngine::EditorUI(float DeltaTime)
 
 	ImGui::Render();
 	ImGuiSDL::Render(ImGui::GetDrawData());
+}
+
+void CEditorEngine::PlayInEditor()
+{
+	CurrentLevel->Init();
+	CurrentLevel->bTicking = true;
+	SetGamePaused(false);
+}
+
+void CEditorEngine::StopPIE()
+{
+	// #TODO
+	CurrentLevel->bTicking = false;
+	SetGamePaused(true);
 }
 
 void CEditorEngine::ShowMenuBar()
@@ -208,9 +225,34 @@ void CEditorEngine::ShowAddComponent()
 	ImGui::End();
 }
 
+void CEditorEngine::ShowPlayButtons()
+{
+	if (!CurrentLevel->bTicking)
+	{
+		if (ImGui::Button("Play in editor", WindowWidth()))
+		{
+			PlayInEditor();
+		}
+	}
+	else
+	{
+		if (ImGui::Button(GetGamePaused() ? "Resume" : "Pause", WindowWidth() * 0.5f))
+		{
+			SetGamePaused(!GetGamePaused());
+		}
+		ImGui::SameLine();
+		if (ImGui::Button("Stop", WindowWidth() * 0.5f))
+		{
+			StopPIE();
+		}
+	}
+}
+
 void CEditorEngine::ShowLevelView()
 {
 	ImGui::Begin("Level view", &bShowLevelView);
+
+	ShowPlayButtons();
 
 	ImGui::LabelText(GetLevel()->GetName().data(), "Level name: ");
 

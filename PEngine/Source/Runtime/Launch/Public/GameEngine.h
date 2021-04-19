@@ -11,6 +11,5 @@ class CGameEngine : public CEngine
 
 public:
 
-	// Editor UI implementation should exist only for EditorEngine
-	virtual void EditorUI(float DeltaTime) override;
+	virtual bool Init() override;
 };

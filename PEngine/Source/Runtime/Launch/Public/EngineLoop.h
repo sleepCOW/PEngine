@@ -33,9 +33,6 @@ public:
 
 	virtual void Tick(float DeltaTime) override;
 
-	// Editor UI implementation should exist only for EditorEngine
-	virtual void EditorUI(float DeltaTime) = 0;
-
 	virtual void HandleInput(const SDL_Event& Event);
 
 	/** Access Helpers */
@@ -43,11 +40,15 @@ public:
 	CConfReader* GetConfReader() const;
 	CLevel* GetLevel() const { return CurrentLevel; }
 
+	bool GetGamePaused() const { return bGamePaused; }
+	void SetGamePaused(bool Value) { bGamePaused = Value; }
+
 protected:
 	UPtr<CObjectManager> ObjectManager;
 	UPtr<CConfReader> ConfReader;
 
 	CLevel* CurrentLevel;
+	bool bGamePaused;
 };
 
 int Run(CEngine* EngineLoop);

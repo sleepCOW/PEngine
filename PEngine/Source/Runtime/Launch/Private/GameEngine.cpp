@@ -1,6 +1,11 @@
 #include "Launch/Public/GameEngine.h"
+#include "Object/Public/Level.h"
 
-void CGameEngine::EditorUI(float DeltaTime)
+bool CGameEngine::Init()
 {
-	// Should be empty!
+	bool bSuccess = Super::Init();
+
+	CurrentLevel->Init();
+
+	return bSuccess;
 }
