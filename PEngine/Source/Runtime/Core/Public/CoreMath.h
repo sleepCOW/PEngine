@@ -12,6 +12,11 @@ struct SVector
 	{
 		return { X + Other.X, Y + Other.Y };
 	}
+	
+	SVector Add(float InX, float InY)
+	{
+		return { X + InX, Y + InY };
+	}
 
 	SVector Substract(const SVector& Other)
 	{
@@ -33,6 +38,9 @@ struct SVector
 	{
 		return sqrt(X * X + Y * Y);
 	}
+
+	void operator +=(const SVector& Other) { *this = Add(Other); }
+	void operator -=(const SVector& Other) { *this = Substract(Other); }
 
 	static SVector ZeroVector() { return {0, 0}; }
 
