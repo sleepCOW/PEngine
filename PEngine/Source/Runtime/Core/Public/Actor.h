@@ -13,6 +13,8 @@ class CActor : public CObject
 public:
 	CActor(CObject* ThisOwner = nullptr);
 
+	virtual void Tick(float DeltaTime) override;
+
 #ifdef WITH_EDITOR
 	virtual void FillEditorFields() override;
 #endif

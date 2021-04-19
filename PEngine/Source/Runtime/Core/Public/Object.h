@@ -48,7 +48,7 @@ public:
 #endif
 
 	/** Whether this object is active and ticking */
-	bool bActive;
+	bool bTicking;
 
 protected:
 	/** Owner of this component */

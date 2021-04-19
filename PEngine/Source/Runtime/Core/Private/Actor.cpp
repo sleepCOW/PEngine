@@ -8,6 +8,11 @@ CActor::CActor(CObject* ThisOwner /*= nullptr*/) : Super(ThisOwner)
 
 }
 
+void CActor::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
+}
+
 void CActor::FillEditorFields()
 {
 	Super::FillEditorFields();

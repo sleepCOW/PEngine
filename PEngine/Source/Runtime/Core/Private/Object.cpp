@@ -6,7 +6,7 @@ DEFINE_META(CObject)
 
 CObject::CObject(CObject* ThisOwner) : Owner(ThisOwner)
 {
-
+	bTicking = true;
 }
 
 CObject::~CObject()
@@ -31,7 +31,7 @@ void CObject::Tick(float DeltaTime)
 {
 	for (auto& Component : GetComponents())
 	{
-		if (Component->bActive)
+		if (Component->bTicking)
 		{
 			Component->Tick(DeltaTime);
 		}
