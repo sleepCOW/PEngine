@@ -13,13 +13,19 @@ class CActor : public CObject
 public:
 	CActor(CObject* ThisOwner = nullptr);
 
+	/** Triggers when object is created during runtime */
+	virtual void PreInit();
+
 	virtual void Tick(float DeltaTime) override;
 
 #ifdef WITH_EDITOR
 	virtual void FillEditorFields() override;
 #endif
 
-protected:
+	/** Helper functions */
+	SVector GetLocation() const { return Location; }
+	void SetLocation(const SVector& Value) { Location = Value; }
 
+protected:
 	SVector Location;
 };

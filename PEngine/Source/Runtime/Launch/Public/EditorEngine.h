@@ -2,6 +2,7 @@
 #pragma once
 
 #include "Launch/Public/EngineLoop.h"
+#include "SDL2/Public/SDL_rect.h"
 
 /**
  * Implements editor engine (have addional UI layer)
@@ -30,7 +31,9 @@ protected:
 
 protected:
 
+	void SetSelectedObject(CObject* NewObject);
 	CObject* SelectedObject;
+	String InputBuffer;
 
 	// UI BEGIN
 
@@ -51,5 +54,9 @@ protected:
 	bool bShowLevelView;
 
 	// UI END
+
+	// Input
+	bool bLMBDown;
+	SDL_Point MousePosition;
 };
 #endif

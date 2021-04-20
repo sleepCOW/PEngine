@@ -26,7 +26,9 @@ enum class EFieldType
 	FLOAT,
 	STRING,
 	MATH_VECTOR,
-	PTR
+	PTR,
+	TEXTURE,
+	RECTANGLE
 };
 
 struct SField

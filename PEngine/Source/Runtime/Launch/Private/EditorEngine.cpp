@@ -12,6 +12,8 @@
 #include "imgui_sdl/Public/imgui_sdl.h"
 #include "SDL2/Public/SDL.h"
 #include "Core/Public/Component.h"
+#include "Core/Public/Actor.h"
+#include "Component/Public/OutlineComponent.h"
 
 /** sleepCOW: make sure ReflectionManager is created among first created objects */
 #pragma init_seg(compiler)
@@ -30,6 +32,9 @@ CEditorEngine::CEditorEngine()
 	bShowLevelView = true;
 	bGamePaused = true;
 	SelectedObject = nullptr;
+
+	// Input
+	bLMBDown = false;
 }
 
 bool CEditorEngine::Init()
@@ -89,9 +94,41 @@ void CEditorEngine::HandleInput(const SDL_Event& Event)
 	{
 		Wheel = Event.wheel.y;
 	}
+	else if (Event.type == SDL_MOUSEBUTTONDOWN)
+	{
+		if (Event.button.button == SDL_BUTTON_LEFT)
+		{
+			for (auto& Object : CurrentLevel->GetObjects())
+			{
+				CActor* Actor = dynamic_cast<CActor*>(Object);
+
+				if (!Actor)
+					continue;
+
+				// Actor guaranteed to have OutlineComponent
+				COutlineComponent* OutlineComp = Actor->GetComponentByClass<COutlineComponent>();
+					
+				if (SDL_PointInRect(&MousePosition, &OutlineComp->GetRectangle()))
+				{
+					SelectedObject = Actor;
+					break;
+				}
+			}
+			bLMBDown = true;
+		}
+	}
+	else if (Event.type == SDL_MOUSEBUTTONUP)
+	{
+		if (Event.button.button == SDL_BUTTON_LEFT)
+		{
+			bLMBDown = false;
+		}
+	}
 
 	int mouseX, mouseY;
 	const int buttons = SDL_GetMouseState(&mouseX, &mouseY);
+	MousePosition.x = mouseX;
+	MousePosition.y = mouseY;
 
 	// Setup low-level inputs (e.g. on Win32, GetKeyboardState(), or write to those fields from your Windows message loop handlers, etc.)
 	//InputOutput.DeltaTime = 1.0f / 120.0f;
@@ -131,6 +168,11 @@ void CEditorEngine::StopPIE()
 	// #TODO
 	CurrentLevel->bTicking = false;
 	SetGamePaused(true);
+}
+
+void CEditorEngine::SetSelectedObject(CObject* NewObject)
+{
+	SelectedObject = NewObject;
 }
 
 void CEditorEngine::ShowMenuBar()
@@ -326,16 +368,36 @@ void CEditorEngine::ShowField(SField& Field)
 	if (Field.FieldType == EFieldType::MATH_VECTOR)
 	{
 		SVector* FVector = reinterpret_cast<SVector*>(Field.PField);
-		ImGui::DragFloat("X", &FVector->X);
-		ImGui::DragFloat("Y", &FVector->Y);
+		if (ImGui::DragFloat("X", &FVector->X))
+		{
+			SelectedObject->PostEditChangeProperty(Field);
+		}
+		if (ImGui::DragFloat("Y", &FVector->Y))
+		{
+			SelectedObject->PostEditChangeProperty(Field);
+		}
 	}
 	else if (Field.FieldType == EFieldType::STRING)
 	{
 		String* FString = reinterpret_cast<String*>(Field.PField);
 
-		if (ImGui::InputText("String field", FString))
+		// #TODO sleepCOW: Find a way to reset buffer so it won't affect next selected object!
+		if (ImGui::InputText("String field", &InputBuffer))
 		{
 
+		}
+	}
+	else if (Field.FieldType == EFieldType::RECTANGLE)
+	{
+		SDL_Rect* Rect = reinterpret_cast<SDL_Rect*>(Field.PField);
+
+		if (ImGui::DragInt("Width", &Rect->w, 1.f, 0, 4000))
+		{
+			SelectedObject->PostEditChangeProperty(Field);
+		}
+		if (ImGui::DragInt("Height", &Rect->h, 1.f, 0, 4000))
+		{
+			SelectedObject->PostEditChangeProperty(Field);
 		}
 	}
 }

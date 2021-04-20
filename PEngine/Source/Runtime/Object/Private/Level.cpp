@@ -39,6 +39,16 @@ void CLevel::LoadFromJson(const String& FileName)
 	// #TODO Deserialize objects in json
 }
 
+void CLevel::SaveToJson()
+{
+	// #TODO
+
+	for (auto& Object : LevelObjects)
+	{
+
+	}
+}
+
 void CLevel::PreInit()
 {
 	Super::PreInit();
@@ -65,3 +75,14 @@ void CLevel::Tick(float DeltaTime)
 	}
 }
 
+#ifdef WITH_EDITOR
+void CLevel::EditorTick(float DeltaTime)
+{
+	Super::EditorTick(DeltaTime);
+
+	for (auto& Object : LevelObjects)
+	{
+		Object->EditorTick(DeltaTime);
+	}
+}
+#endif

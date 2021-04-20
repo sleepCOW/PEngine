@@ -8,6 +8,9 @@ struct SVector
 	SVector(float x = 0.f, float y = 0.f) : X(x), Y(y)
 	{}
 
+	SVector(const SVector& Other) : X(Other.X), Y(Other.Y)
+	{}
+
 	SVector Add(const SVector& Other)
 	{
 		return { X + Other.X, Y + Other.Y };
@@ -41,6 +44,7 @@ struct SVector
 
 	void operator +=(const SVector& Other) { *this = Add(Other); }
 	void operator -=(const SVector& Other) { *this = Substract(Other); }
+	SVector& operator =(const SVector& Other) { X = Other.X; Y = Other.Y; return *this; }
 
 	static SVector ZeroVector() { return {0, 0}; }
 

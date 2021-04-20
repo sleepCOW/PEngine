@@ -19,6 +19,11 @@ public:
 	/** Object tick, called only in runtime */
 	virtual void Tick(float DeltaTime);
 
+#ifdef WITH_EDITOR
+	/** Object tick, called only in runtime */
+	virtual void EditorTick(float DeltaTime);
+#endif
+
 	/** Helpers */
 	Vector<CObject*>& GetObjects() { return LevelObjects; }
 	const String& GetName() { return LevelName; }
@@ -30,6 +35,7 @@ public:
 	 */
 	void NewLevel();
 	void LoadFromJson(const String& FileName);
+	void SaveToJson();
 
 	/**
 	 * Create object that is owned by this level
