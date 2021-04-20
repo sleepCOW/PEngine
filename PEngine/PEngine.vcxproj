@@ -333,6 +333,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Source\Runtime\Component\Private\OutlineComponent.cpp" />
     <ClCompile Include="Source\Runtime\Component\Private\RenderComponent.cpp" />
     <ClCompile Include="Source\Runtime\Component\Private\SpriteComponent.cpp" />
     <ClCompile Include="Source\Runtime\Core\Private\Actor.cpp" />
@@ -358,6 +359,7 @@
     <ClCompile Include="Source\ThirdParty\imgui_sdl\Public\imgui_sdl.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Source\Runtime\Component\Public\OutlineComponent.h" />
     <ClInclude Include="Source\Runtime\Component\Public\RenderComponent.h" />
     <ClInclude Include="Source\Runtime\Component\Public\SpriteComponent.h" />
     <ClInclude Include="Source\Runtime\Core\Public\Actor.h" />

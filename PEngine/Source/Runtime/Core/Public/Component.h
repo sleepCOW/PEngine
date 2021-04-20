@@ -11,14 +11,17 @@ public:
 	~CComponent() {}
 
 	/** Triggers when object is created during runtime */
-	virtual void PreInit();
+	virtual void PreInit() override;
 
 	/** Triggers when game started */
-	virtual void Init();
+	virtual void Init() override;
 
 	/** Object tick, called only in runtime */
-	virtual void Tick(float DeltaTime);
+	virtual void Tick(float DeltaTime) override;
+
+#ifdef WITH_EDITOR
+	virtual void EditorTick(float DeltaTime) override;
+#endif
 
 protected:
-
 };

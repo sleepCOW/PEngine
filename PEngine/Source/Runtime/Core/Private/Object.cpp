@@ -55,4 +55,18 @@ void CObject::FillEditorFields()
 {
 	EditorFields.push_back({ &ObjectName, EFieldType::STRING });
 }
+
+void CObject::EditorTick(float DeltaTime)
+{
+	for (auto& Component : GetComponents())
+	{
+		Component->EditorTick(DeltaTime);
+	}
+}
+
+void CObject::PostEditChangeProperty(SField& ChangedValue)
+{
+
+}
+
 #endif

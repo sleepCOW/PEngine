@@ -31,6 +31,19 @@ public:
 	const String& GetObjectName() const { return ObjectName; }
 	Vector<CComponent*>& GetComponents();
 
+	template <typename T>
+	T* GetComponentByClass()
+	{
+		for (auto& Component : GetComponents())
+		{
+			if (T* FoundComponent = dynamic_cast<T*>(Component))
+			{
+				return FoundComponent;
+			}
+		}
+		return nullptr;
+	}
+
 #ifdef WITH_EDITOR
 	Vector<SField>& GetEditorFields()
 	{
@@ -42,6 +55,12 @@ public:
 		return EditorFields; 
 	};
 	virtual void FillEditorFields();
+
+	/** Object tick, called only in runtime */
+	virtual void EditorTick(float DeltaTime);
+
+	/** Called when any editor property of this object was changed in editor */
+	virtual void PostEditChangeProperty(SField& ChangedValue);
 
 	bool bFilledEditorFields = false;
 	Vector<SField> EditorFields;

@@ -61,14 +61,15 @@ void CEngine::Close()
 
 void CEngine::Tick(float DeltaTime)
 {
-	if (!bGamePaused)
+	for (auto& Object : ObjectManager->GetObjects())
 	{
-		for (auto& Object : ObjectManager->GetObjects())
+		// EditorTick is always enabled
+		Object->EditorTick(DeltaTime);
+			
+		// If game not paused and object is marked tickable
+		if (!bGamePaused && Object->bTicking)
 		{
-			if (Object->bTicking)
-			{
-				Object->Tick(DeltaTime);
-			}
+			Object->Tick(DeltaTime);
 		}
 	}
 
@@ -173,6 +174,9 @@ int Run(CEngine* EngineLoop)
 #ifdef WITH_EDITOR
 			static_cast<CEditorEngine*>(EngineLoop)->EditorUI(DeltaTime);
 #endif
+
+			// Reset background to black
+			SDL_SetRenderDrawColor(GRenderer, 0, 0, 0, 0);
 
 			SDL_RenderPresent(GRenderer);
 			End = SDL_GetTicks();
