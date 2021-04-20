@@ -12,6 +12,11 @@ class CSpriteComponent : public CRenderComponent
 public:
 	CSpriteComponent(CObject* Owner);
 
+#ifdef WITH_EDITOR
+	virtual void FillEditorFields();
+#endif
+
+	virtual void Draw() const override;
 
 protected:
 	int ZOrder;

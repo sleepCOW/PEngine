@@ -7,3 +7,15 @@ CSpriteComponent::CSpriteComponent(CObject* Owner) : Super(Owner)
 {
 
 }
+
+#ifdef WITH_EDITOR
+void CSpriteComponent::FillEditorFields()
+{
+	Super::FillEditorFields();
+}
+#endif
+
+void CSpriteComponent::Draw() const
+{
+
+}
