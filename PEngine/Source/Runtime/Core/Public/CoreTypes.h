@@ -14,7 +14,7 @@ constexpr int INDEX_NONE = -1;
 
 struct SWindowParam
 {
-	std::string WindowTitle;
+	String WindowTitle;
 	int Width = 0;
 	int Height = 0;
 	bool bFullscreen = false;
@@ -38,5 +38,12 @@ struct SField
 	void* PField;
 	const char* FieldName;
 	EFieldType FieldType;
+
+	/** Get data converted to desired type */
+	template <typename T>
+	T& Get()
+	{
+		return *(reinterpret_cast<T*>(PField));
+	}
 };
 #endif WITH_EDITOR

@@ -175,16 +175,16 @@ void CEditorEngine::SetSelectedObject(CObject* NewObject)
 	SelectedObject = NewObject;
 }
 
-void CEditorEngine::ResetInputBuffer(String* Field)
+void CEditorEngine::ResetInputBuffer(String& Field)
 {
 	static CObject* PrevObject = nullptr;
 	static String* PrevField = nullptr;
 	if (PrevObject != SelectedObject ||
-		PrevField != Field)
+		PrevField != &Field)
 	{
-		InputBuffer = *Field;
+		InputBuffer = Field;
 		PrevObject = SelectedObject;
-		PrevField = Field;
+		PrevField = &Field;
 	}
 }
 
@@ -381,39 +381,40 @@ void CEditorEngine::ShowField(SField& Field)
 	ImGui::Text(Field.FieldName);
 	if (Field.FieldType == EFieldType::MATH_VECTOR)
 	{
-		SVector* FVector = reinterpret_cast<SVector*>(Field.PField);
-		if (ImGui::DragFloat("X", &FVector->X, FVector->DragSpeed))
+		SVector& FVector = Field.Get<SVector>();
+
+		if (ImGui::DragFloat("X", &FVector.X, FVector.DragSpeed))
 		{
 			SelectedObject->PostEditChangeProperty(Field);
 		}
-		if (ImGui::DragFloat("Y", &FVector->Y, FVector->DragSpeed))
+		if (ImGui::DragFloat("Y", &FVector.Y, FVector.DragSpeed))
 		{
 			SelectedObject->PostEditChangeProperty(Field);
 		}
 	}
 	else if (Field.FieldType == EFieldType::STRING)
 	{
-		String* FStringField = reinterpret_cast<String*>(Field.PField);
+		String& FStringField = Field.Get<String>();
 
 		// If we changed selected object or field then reset input buffer to prevent previous changes applied to a new field!
 		ResetInputBuffer(FStringField);
 
 		if (ImGui::InputText(Field.FieldName, &InputBuffer))
 		{
-			*FStringField = InputBuffer;
+			FStringField = InputBuffer;
 
 			SelectedObject->PostEditChangeProperty(Field);
 		}
 	}
 	else if (Field.FieldType == EFieldType::RECTANGLE)
 	{
-		SDL_Rect* Rect = reinterpret_cast<SDL_Rect*>(Field.PField);
+		SDL_Rect& Rect = Field.Get<SDL_Rect>();
 
-		if (ImGui::DragInt("Width", &Rect->w, 1.f, 0, 4000))
+		if (ImGui::DragInt("Width", &Rect.w, 1.f, 0, 4000))
 		{
 			SelectedObject->PostEditChangeProperty(Field);
 		}
-		if (ImGui::DragInt("Height", &Rect->h, 1.f, 0, 4000))
+		if (ImGui::DragInt("Height", &Rect.h, 1.f, 0, 4000))
 		{
 			SelectedObject->PostEditChangeProperty(Field);
 		}
