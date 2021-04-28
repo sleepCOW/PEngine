@@ -10,6 +10,8 @@ using TChar = char;
 
 using String = std::string;
 
+constexpr int INDEX_NONE = -1;
+
 struct SWindowParam
 {
 	std::string WindowTitle;
@@ -34,6 +36,7 @@ enum class EFieldType
 struct SField
 {
 	void* PField;
+	const char* FieldName;
 	EFieldType FieldType;
 };
 #endif WITH_EDITOR

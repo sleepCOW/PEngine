@@ -1,8 +1,11 @@
 #include "Core/Public/Component.h"
+#include "Core/Public/Actor.h"
 
 CComponent::CComponent(CObject* Owner) : Super(Owner)
 {
 	bTicking = true;
+
+	ActorOwner = dynamic_cast<CActor*>(Owner);
 }
 
 void CComponent::PreInit()

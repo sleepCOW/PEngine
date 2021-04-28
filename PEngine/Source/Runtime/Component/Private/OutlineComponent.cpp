@@ -23,7 +23,7 @@ void COutlineComponent::FillEditorFields()
 {
 	Super::FillEditorFields();
 
-	EditorFields.push_back({ &OutlineRectangle, EFieldType::RECTANGLE });
+	AddEditorField("Outline Rectangle", &OutlineRectangle, EFieldType::RECTANGLE);
 }
 
 void COutlineComponent::EditorTick(float DeltaTime)

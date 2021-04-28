@@ -175,6 +175,19 @@ void CEditorEngine::SetSelectedObject(CObject* NewObject)
 	SelectedObject = NewObject;
 }
 
+void CEditorEngine::ResetInputBuffer(String* Field)
+{
+	static CObject* PrevObject = nullptr;
+	static String* PrevField = nullptr;
+	if (PrevObject != SelectedObject ||
+		PrevField != Field)
+	{
+		InputBuffer = *Field;
+		PrevObject = SelectedObject;
+		PrevField = Field;
+	}
+}
+
 void CEditorEngine::ShowMenuBar()
 {
 	if (ImGui::BeginMainMenuBar())
@@ -365,26 +378,31 @@ void CEditorEngine::ShowObjectEdit()
 
 void CEditorEngine::ShowField(SField& Field)
 {
+	ImGui::Text(Field.FieldName);
 	if (Field.FieldType == EFieldType::MATH_VECTOR)
 	{
 		SVector* FVector = reinterpret_cast<SVector*>(Field.PField);
-		if (ImGui::DragFloat("X", &FVector->X))
+		if (ImGui::DragFloat("X", &FVector->X, FVector->DragSpeed))
 		{
 			SelectedObject->PostEditChangeProperty(Field);
 		}
-		if (ImGui::DragFloat("Y", &FVector->Y))
+		if (ImGui::DragFloat("Y", &FVector->Y, FVector->DragSpeed))
 		{
 			SelectedObject->PostEditChangeProperty(Field);
 		}
 	}
 	else if (Field.FieldType == EFieldType::STRING)
 	{
-		String* FString = reinterpret_cast<String*>(Field.PField);
+		String* FStringField = reinterpret_cast<String*>(Field.PField);
 
-		// #TODO sleepCOW: Find a way to reset buffer so it won't affect next selected object!
-		if (ImGui::InputText("String field", &InputBuffer))
+		// If we changed selected object or field then reset input buffer to prevent previous changes applied to a new field!
+		ResetInputBuffer(FStringField);
+
+		if (ImGui::InputText(Field.FieldName, &InputBuffer))
 		{
+			*FStringField = InputBuffer;
 
+			SelectedObject->PostEditChangeProperty(Field);
 		}
 	}
 	else if (Field.FieldType == EFieldType::RECTANGLE)

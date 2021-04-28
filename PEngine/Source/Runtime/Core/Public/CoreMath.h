@@ -50,4 +50,8 @@ struct SVector
 
 	float X;
 	float Y;
+
+#ifdef WITH_EDITOR
+	float DragSpeed = 1.f;
+#endif
 };

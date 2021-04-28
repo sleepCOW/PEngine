@@ -56,6 +56,9 @@ public:
 	};
 	virtual void FillEditorFields();
 
+	void AddEditorField(const char* FieldName, void* FieldAdress, EFieldType FieldType);
+	void AddEditorField(const SField& Field);
+
 	/** Object tick, called only in runtime */
 	virtual void EditorTick(float DeltaTime);
 

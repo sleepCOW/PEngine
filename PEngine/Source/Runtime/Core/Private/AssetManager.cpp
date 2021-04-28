@@ -132,10 +132,36 @@ Vector<STextInfo>& CAssetManager::GetLoadedTextures()
 	return LoadedTextures;
 }
 
-Sprite::Sprite(const String& PathToTexture)
+SSprite::SSprite()
 {
+	TextureIndex = INDEX_NONE;
+}
+
+SSprite::SSprite(const String& PathToTexture)
+{
+	TextureIndex = INDEX_NONE;
+
+	AssignNewTexture(PathToTexture);
+}
+
+SSprite::~SSprite()
+{
+	ReleaseTexture();
+}
+
+bool SSprite::AssignNewTexture(const String& PathToTexture)
+{
+	// Release previous texture
+	ReleaseTexture();
+
 	// We assume texture is always valid
 	STextInfo& TextInfo = CAssetManager::GetAssetManager().GetOrLoadTexture(PathToTexture);
+	
+	if (TextInfo.Index == INDEX_NONE)
+	{
+		return false;
+	}
+
 
 	Texture = TextInfo.Texture;
 	TextureIndex = TextInfo.Index;
@@ -143,10 +169,17 @@ Sprite::Sprite(const String& PathToTexture)
 	TextInfo.UsageCount += 1;
 
 	SDL_QueryTexture(Texture, nullptr, nullptr, &Width, &Height);
+	return true;
 }
 
-Sprite::~Sprite()
+void SSprite::ReleaseTexture()
 {
-	// Decrease usage count and delete texture if < 1 but not today.
-	CAssetManager::GetAssetManager().GetLoadedTextures()[TextureIndex].UsageCount -= 1;
+	if (TextureIndex != INDEX_NONE)
+	{
+		// Decrease usage count and delete texture if < 1 but not today.
+		CAssetManager::GetAssetManager().GetLoadedTextures()[TextureIndex].UsageCount -= 1;
+
+		TextureIndex = INDEX_NONE;
+		Texture = nullptr;
+	}
 }

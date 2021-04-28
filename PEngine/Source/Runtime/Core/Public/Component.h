@@ -2,6 +2,8 @@
 
 #include "Core/Public/Object.h"
 
+class CActor;
+
 class CComponent : public CObject
 {
 	DECLARE_CLASS(CComponent, CObject)
@@ -24,4 +26,5 @@ public:
 #endif
 
 protected:
+	CActor* ActorOwner;
 };

@@ -53,7 +53,17 @@ Vector<CComponent*>& CObject::GetComponents()
 #ifdef WITH_EDITOR
 void CObject::FillEditorFields()
 {
-	EditorFields.push_back({ &ObjectName, EFieldType::STRING });
+	AddEditorField("Object name", &ObjectName, EFieldType::STRING);
+}
+
+void CObject::AddEditorField(const SField& Field)
+{
+	EditorFields.push_back(Field);
+}
+
+void CObject::AddEditorField(const char* FieldName, void* FieldAdress, EFieldType FieldType)
+{
+	AddEditorField({ FieldAdress, FieldName, FieldType });
 }
 
 void CObject::EditorTick(float DeltaTime)

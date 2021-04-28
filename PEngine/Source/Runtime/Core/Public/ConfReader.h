@@ -61,4 +61,6 @@ protected:
 	SFile* ConfigurationDoc;
 
 	Vector<SFile> OpenedFiles;
+
+	Map<void*, int> PointerToId;
 };

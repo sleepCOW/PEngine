@@ -32,6 +32,9 @@ protected:
 protected:
 
 	void SetSelectedObject(CObject* NewObject);
+
+	void ResetInputBuffer(String* Field);
+
 	CObject* SelectedObject;
 	String InputBuffer;
 

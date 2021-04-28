@@ -3,11 +3,15 @@
 #include "CoreMinimal.h"
 #include "SDL2/Public/SDL.h"
 
-struct Sprite
+struct SSprite
 {
 public:
-	Sprite(const String& PathToTexture);
-	~Sprite();
+	SSprite();
+	SSprite(const String& PathToTexture);
+	~SSprite();
+
+	bool AssignNewTexture(const String& PathToTexture);
+	void ReleaseTexture();
 
 	int Width, Height;
 	// Index of this texture in AssetManager LoadedTextures array
@@ -19,7 +23,7 @@ struct STextInfo
 {
 	SDL_Texture* Texture = nullptr;
 	int UsageCount = 0;
-	int Index = 0;
+	int Index = INDEX_NONE;
 };
 
 class CAssetManager

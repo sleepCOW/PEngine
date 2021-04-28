@@ -27,5 +27,5 @@ void CActor::FillEditorFields()
 {
 	Super::FillEditorFields();
 
-	EditorFields.push_back({ &Location, EFieldType::MATH_VECTOR});
+	AddEditorField("Location", &Location, EFieldType::MATH_VECTOR);
 }
