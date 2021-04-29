@@ -38,7 +38,7 @@ public:
 	/** Access Helpers */
 	CObjectManager* GetObjectManager() const;
 	CConfReader* GetConfReader() const;
-	CLevel* GetLevel() const { return CurrentLevel; }
+	CLevel* GetLevel() const { return CurrentLevel.get(); }
 
 	bool GetGamePaused() const { return bGamePaused; }
 	void SetGamePaused(bool Value) { bGamePaused = Value; }
@@ -47,7 +47,7 @@ protected:
 	UPtr<CObjectManager> ObjectManager;
 	UPtr<CConfReader> ConfReader;
 
-	CLevel* CurrentLevel;
+	UPtr<CLevel> CurrentLevel;
 	bool bGamePaused;
 };
 

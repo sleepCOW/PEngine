@@ -54,7 +54,7 @@ public:
 	/**
 	 * Save given json to provided file handle
 	 */
-	void SaveJSON(FILE* FileHandle, rapidjson::Document& JsonDocument);
+	void SaveJSON(FILE*& FileHandle, rapidjson::Document& JsonDocument);
 
 protected:
 	/** Ptr to ConfigurationDoc in OpenedFiles vector */

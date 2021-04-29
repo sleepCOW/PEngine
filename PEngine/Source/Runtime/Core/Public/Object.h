@@ -81,6 +81,7 @@ protected:
 	Vector<CComponent*> Components;
 };
 
+
 // Create new object in runtime/editor
 template <typename T>
 CObject* NewObject(CObject* Owner)
@@ -115,4 +116,11 @@ CObject* NewObject(CObject* Owner)
 	}
 
 	return CreatedObject;
+}
+
+// Helper function to avoid type casting when using NewObject
+template <typename T>
+T* CreateObject(CObject* Owner)
+{
+	return static_cast<T*>(NewObject<T>(Owner));
 }

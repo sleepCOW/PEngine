@@ -28,7 +28,6 @@ void CLevel::NewLevel()
 	}
 
 	LevelName = "untitled";
-	LevelJSON->Clear();
 }
 
 void CLevel::LoadFromJson(const String& FileName)

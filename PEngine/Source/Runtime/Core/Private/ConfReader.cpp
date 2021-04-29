@@ -11,6 +11,14 @@ constexpr size_t BufferSize = 65536; // 64 Kb
 CConfReader::CConfReader()
 {
 	ConfigurationDoc = OpenJSON(CONFIGURATION_PATH, true);
+
+	if (!ConfigurationDoc->Json.IsObject())
+	{
+		rapidjson::Document& Config = ConfigurationDoc->Json;
+		
+		Config.SetObject();
+		Config.AddMember("StartupLevel", Value(""), Config.GetAllocator());
+	}
 }
 
 CConfReader::~CConfReader()
@@ -110,7 +118,7 @@ void CConfReader::SaveJSON(const String& Path, rapidjson::Document& JsonDocument
 	SaveJSON(File->Handle, JsonDocument);
 }
 
-void CConfReader::SaveJSON(FILE* FileHandle, rapidjson::Document& JsonDocument)
+void CConfReader::SaveJSON(FILE*& FileHandle, rapidjson::Document& JsonDocument)
 {
 	char WriteBuffer[BufferSize];
 	FileWriteStream os(FileHandle, WriteBuffer, BufferSize);

@@ -39,7 +39,7 @@ bool CEngine::Init()
 	ObjectManager = std::make_unique<CObjectManager>();
 	ConfReader = std::make_unique<CConfReader>();
 
-	CurrentLevel = static_cast<CLevel*>(NewObject<CLevel>(nullptr));
+	CurrentLevel.reset(CreateObject<CLevel>(nullptr));
 
 	String Level = ConfReader->GetString("StartupLevel");
 	if (!Level.empty())
@@ -185,6 +185,7 @@ int Run(CEngine* EngineLoop)
 	}
 
 	EngineLoop->Close();
+	delete EngineLoop;
 
 	SDL_DestroyRenderer(GRenderer);
 	SDL_DestroyWindow(GMainWindow);
