@@ -379,6 +379,7 @@ void CEditorEngine::ShowObjectEdit()
 void CEditorEngine::ShowField(SField& Field)
 {
 	ImGui::Text(Field.FieldName);
+	ImGui::PushID(&Field);
 	if (Field.FieldType == EFieldType::MATH_VECTOR)
 	{
 		SVector& FVector = Field.Get<SVector>();
@@ -419,6 +420,8 @@ void CEditorEngine::ShowField(SField& Field)
 			SelectedObject->PostEditChangeProperty(Field);
 		}
 	}
+	ImGui::PopID();
+	ImGui::Separator();
 }
 
 #endif

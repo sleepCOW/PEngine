@@ -20,6 +20,7 @@ public:
 #endif
 
 	virtual void Draw() const override;
+	SSprite& GetSprite() { return Sprite; }
 
 protected:
 	String TexturePath;

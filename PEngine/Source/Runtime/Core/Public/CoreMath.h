@@ -45,6 +45,7 @@ struct SVector
 	void operator +=(const SVector& Other) { *this = Add(Other); }
 	void operator -=(const SVector& Other) { *this = Substract(Other); }
 	SVector& operator =(const SVector& Other) { X = Other.X; Y = Other.Y; return *this; }
+	SVector operator *(float Scalar) { return { X * Scalar, Y * Scalar }; };
 
 	static SVector ZeroVector() { return {0, 0}; }
 

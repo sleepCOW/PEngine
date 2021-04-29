@@ -144,6 +144,9 @@
     <ClCompile Include="Source\Runtime\Component\Private\OutlineComponent.cpp">
       <Filter>Source\Runtime\Component\Private</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Runtime\Object\Private\Mario.cpp">
+      <Filter>Source\Runtime\Core\Private</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Runtime\Core\Public\CoreMinimal.h">
@@ -550,6 +553,9 @@
     </ClInclude>
     <ClInclude Include="Source\Runtime\Component\Public\OutlineComponent.h">
       <Filter>Source\Runtime\Component\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Runtime\Object\Public\Mario.h">
+      <Filter>Source\Runtime\Core\Public</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

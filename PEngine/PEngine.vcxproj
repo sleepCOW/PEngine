@@ -350,6 +350,7 @@
     <ClCompile Include="Source\Runtime\Launch\Private\GameEngine.cpp" />
     <ClCompile Include="Source\Runtime\Launch\Private\Windows\LaunchWindows.cpp" />
     <ClCompile Include="Source\Runtime\Object\Private\Level.cpp" />
+    <ClCompile Include="Source\Runtime\Object\Private\Mario.cpp" />
     <ClCompile Include="Source\ThirdParty\imgui\Public\imgui.cpp" />
     <ClCompile Include="Source\ThirdParty\imgui\Public\imgui_demo.cpp" />
     <ClCompile Include="Source\ThirdParty\imgui\Public\imgui_draw.cpp" />
@@ -379,6 +380,7 @@
     <ClInclude Include="Source\Runtime\Launch\Public\EngineLoop.h" />
     <ClInclude Include="Source\Runtime\Launch\Public\GameEngine.h" />
     <ClInclude Include="Source\Runtime\Object\Public\Level.h" />
+    <ClInclude Include="Source\Runtime\Object\Public\Mario.h" />
     <ClInclude Include="Source\ThirdParty\imgui\Public\imconfig.h" />
     <ClInclude Include="Source\ThirdParty\imgui\Public\imgui.h" />
     <ClInclude Include="Source\ThirdParty\imgui\Public\imgui_impl_sdl.h" />
