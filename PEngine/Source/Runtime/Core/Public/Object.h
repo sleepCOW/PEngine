@@ -1,9 +1,45 @@
 #pragma once
 
 #include "Launch/Public/EngineLoop.h"
+#include "rapidJSON/document.h"
 
 class CComponent;
 class CRenderComponent;
+
+struct SArchive
+{
+public:
+	SArchive(rapidjson::Document::AllocatorType& InAllocator) : CurrentObjectIndex(0), JsonAllocator(InAllocator) {}
+
+	int GetObjectIndex(CObject* Object)
+	{
+		if (ObjectToIndex.find(Object) == ObjectToIndex.end())
+		{
+			AddObjectIndex(Object, CurrentObjectIndex++);
+		}
+		return ObjectToIndex[Object];
+	}
+
+	void AddObjectIndex(CObject* Object, int Index)
+	{
+		ObjectToIndex[Object] = Index;
+		IndexToObject[Index] = Object;
+	}
+
+	CObject* GetObjectFromIndex(int Index)
+	{
+		return IndexToObject[Index];
+	}
+
+
+	rapidjson::Document::AllocatorType& GetAllocator() const { return JsonAllocator; }
+
+protected:
+	int CurrentObjectIndex;
+	Map<CObject*, int> ObjectToIndex;
+	Map<int, CObject*> IndexToObject;
+	rapidjson::Document::AllocatorType& JsonAllocator;
+};
 
 /**
  * Base class for ?
@@ -24,6 +60,23 @@ public:
 
 	/** Object tick, called only in runtime */
 	virtual void Tick(float DeltaTime);
+
+	/**
+	 * Serialize object into json
+	 * 
+	 * @param OutValue	json value that needs to be filled by the function
+	 * @param Archive	Helper object to serialize pointers & recieve additional serialization info
+	 * @return			true on success, false otherwise
+	 */
+	virtual bool Serialize(rapidjson::Value& OutValue, SArchive& Archive);
+
+	/**
+	 * Deserialize object from json into a valid object
+	 *
+	 * @param InValue	Json representation of this object
+	 * @return			Valid CObject ptr on newly created object, nullptr otherwise
+	 */
+	virtual bool Deserialize(rapidjson::Value& InValue, SArchive& Archive);
 
 	void AddComponent(CComponent* Component);
 
@@ -65,15 +118,17 @@ public:
 	/** Called when any editor property of this object was changed in editor */
 	virtual void PostEditChangeProperty(SField& ChangedValue);
 
-	bool bFilledEditorFields = false;
 	Vector<SField> EditorFields;
+	bool bFilledEditorFields = false;
 #endif
 
 	/** Whether this object is active and ticking */
 	bool bTicking;
 
+	bool bMustBeSerialized;
+
 protected:
-	/** Owner of this component */
+	/** Owner of this object */
 	CObject* Owner;
 
 	String ObjectName;
@@ -86,7 +141,7 @@ protected:
 template <typename T>
 CObject* NewObject(CObject* Owner)
 {
-	CObjectManager* ObjectManager = GEngineLoop->GetObjectManager();
+	CObjectManager* ObjectManager = GEngine->GetObjectManager();
 
 	CObject* CreatedObject = new T(Owner);
 

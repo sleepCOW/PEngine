@@ -18,6 +18,9 @@ public:
 
 	virtual void Tick(float DeltaTime) override;
 
+	virtual bool Serialize(rapidjson::Value& OutValue, SArchive& Archive) override;
+	virtual bool Deserialize(rapidjson::Value& InValue, SArchive& Archive) override;
+
 #ifdef WITH_EDITOR
 	virtual void FillEditorFields() override;
 #endif

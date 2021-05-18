@@ -1,5 +1,5 @@
-#ifdef WITH_EDITOR
 #include "Core/Public/ReflectionManager.h"
+#include "Launch/Public/EngineLoop.h"
 
 void CReflectionManager::AddObject(const String& ClassName)
 {
@@ -63,15 +63,13 @@ CReflectionData::CReflectionData(const String& ClassName, bool bComponent, NewOb
 {
 	if (bComponent)
 	{
-		ReflectionManager.AddComponent(ClassName);
+		GReflectionManager.AddComponent(ClassName);
 	}
 	else
 	{
-		ReflectionManager.AddObject(ClassName);
+		GReflectionManager.AddObject(ClassName);
 	}
 
-	ReflectionManager.AddToTypeMap(ClassName, Function);
-	ReflectionManager.AddToTypeMap(ClassName, ActorFunction);
+	GReflectionManager.AddToTypeMap(ClassName, Function);
+	GReflectionManager.AddToTypeMap(ClassName, ActorFunction);
 }
-
-#endif

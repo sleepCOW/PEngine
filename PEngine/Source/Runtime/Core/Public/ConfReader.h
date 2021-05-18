@@ -3,17 +3,21 @@
 #include "CoreMinimal.h"
 #include "rapidJSON/document.h"
 
-class CConfReader
+/**
+ * Json files manager
+ */
+class CFileManager
 {
 public:
 	struct SFile
 	{
 		FILE* Handle = nullptr;
+		const String FileName;
 		rapidjson::Document Json;
 	};
 	
-	CConfReader();
-	~CConfReader();
+	CFileManager();
+	~CFileManager();
 
 	/** Get int value from configuration document */
 	int GetInt(const String& ValueName);
@@ -54,13 +58,11 @@ public:
 	/**
 	 * Save given json to provided file handle
 	 */
-	void SaveJSON(FILE*& FileHandle, rapidjson::Document& JsonDocument);
+	void SaveJSON(FILE*& FileHandle, const String& Path, rapidjson::Document& JsonDocument);
 
 protected:
 	/** Ptr to ConfigurationDoc in OpenedFiles vector */
 	SFile* ConfigurationDoc;
 
 	Vector<SFile> OpenedFiles;
-
-	Map<void*, int> PointerToId;
 };

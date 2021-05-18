@@ -46,9 +46,6 @@
     <Filter Include="Source\ThirdParty\imgui_sdl\Public">
       <UniqueIdentifier>{ac690742-cf66-4245-99db-8b2a7c11f930}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source\Runtime\Interface">
-      <UniqueIdentifier>{f353ca1d-debf-40d4-9e22-d6fa7180e75f}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source\Runtime\Component">
       <UniqueIdentifier>{ec9705f6-b463-43be-9b70-b95b56790516}</UniqueIdentifier>
     </Filter>
@@ -535,9 +532,6 @@
     </ClInclude>
     <ClInclude Include="Source\ThirdParty\rapidJSON\writer.h">
       <Filter>Source\ThirdParty\rapidJSON</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Runtime\Interface\ISerializable.h">
-      <Filter>Source\Runtime\Interface</Filter>
     </ClInclude>
     <ClInclude Include="Source\Runtime\Core\Public\ConfReader.h">
       <Filter>Source\Runtime\Core\Public</Filter>

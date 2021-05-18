@@ -12,6 +12,8 @@ typedef union SDL_Event SDL_Event;
 class CObjectManager;
 class CLevel;
 
+extern CReflectionManager GReflectionManager;
+
 /**
  * Implements the main engine loop.
  * Have common parts of GameEngine and EditorEngine
@@ -37,7 +39,7 @@ public:
 
 	/** Access Helpers */
 	CObjectManager* GetObjectManager() const;
-	CConfReader* GetConfReader() const;
+	CFileManager* GetConfReader() const;
 	CLevel* GetLevel() const { return CurrentLevel.get(); }
 
 	bool GetGamePaused() const { return bGamePaused; }
@@ -45,10 +47,12 @@ public:
 
 protected:
 	UPtr<CObjectManager> ObjectManager;
-	UPtr<CConfReader> ConfReader;
+	UPtr<CFileManager> ConfReader;
 
 	UPtr<CLevel> CurrentLevel;
 	bool bGamePaused;
 };
 
 int Run(CEngine* EngineLoop);
+
+extern CEngine* GEngine;

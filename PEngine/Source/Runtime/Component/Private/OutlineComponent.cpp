@@ -7,7 +7,7 @@ DEFINE_META(COutlineComponent)
 
 COutlineComponent::COutlineComponent(CObject* Owner) : Super(Owner)
 {
-
+	bMustBeSerialized = false;
 }
 
 void COutlineComponent::PreInit()

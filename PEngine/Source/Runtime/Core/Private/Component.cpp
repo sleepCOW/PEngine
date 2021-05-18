@@ -23,6 +23,11 @@ void CComponent::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 }
 
+bool CComponent::Serialize(rapidjson::Value& OutValue, SArchive& Archive)
+{
+	return Super::Serialize(OutValue, Archive);
+}
+
 #ifdef WITH_EDITOR
 void CComponent::EditorTick(float DeltaTime)
 {

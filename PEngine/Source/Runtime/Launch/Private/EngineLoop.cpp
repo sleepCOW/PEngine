@@ -1,6 +1,7 @@
 #include "Launch/Public/EngineLoop.h"
 
 #include "Core/Public/ObjectManager.h"
+#include "Core/Public/ReflectionManager.h"
 #include "Component/Public/RenderComponent.h"
 
 #include <stdlib.h>
@@ -20,6 +21,10 @@
 SDL_Renderer* GRenderer;
 SDL_Window* GMainWindow;
 
+/** sleepCOW: make sure ReflectionManager is created among first created objects */
+#pragma init_seg(compiler)
+CReflectionManager GReflectionManager;
+
 CEngine::CEngine()
 {
 	CurrentLevel = nullptr;
@@ -37,7 +42,7 @@ void CEngine::PreInit(SWindowParam& OutWindowParam)
 bool CEngine::Init()
 {
 	ObjectManager = std::make_unique<CObjectManager>();
-	ConfReader = std::make_unique<CConfReader>();
+	ConfReader = std::make_unique<CFileManager>();
 
 	CurrentLevel.reset(CreateObject<CLevel>(nullptr));
 
@@ -96,7 +101,7 @@ CObjectManager* CEngine::GetObjectManager() const
 	return ObjectManager.get();
 }
 
-CConfReader* CEngine::GetConfReader() const
+CFileManager* CEngine::GetConfReader() const
 {
 	return ConfReader.get();
 }

@@ -6,7 +6,7 @@
 #include <corecrt_io.h>
 #include <windows.h>
 
-CEngine* GEngineLoop = nullptr;
+CEngine* GEngine = nullptr;
 
 // #TODO: Refactor
 void RedirectIOToConsole()
@@ -34,11 +34,11 @@ int WINAPI WinMain(_In_ HINSTANCE hInInstance, _In_opt_ HINSTANCE hPrevInstance,
 	RedirectIOToConsole();
 
 #ifdef WITH_EDITOR
-	GEngineLoop = new CEditorEngine;
+	GEngine = new CEditorEngine;
 #else
-	GEngineLoop = new CGameEngine;
+	GEngine = new CGameEngine;
 #endif
 
-	int ErrorCode = Run(GEngineLoop);
+	int ErrorCode = Run(GEngine);
 	return ErrorCode;
 }

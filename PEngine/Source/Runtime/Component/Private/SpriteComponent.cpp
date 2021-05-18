@@ -33,6 +33,36 @@ void CSpriteComponent::PostEditChangeProperty(SField& ChangedValue)
 
 #endif
 
+bool CSpriteComponent::Serialize(rapidjson::Value& OutValue, SArchive& Archive)
+{
+	Super::Serialize(OutValue, Archive);
+
+	using rapidjson::Value;
+
+	auto& Allocator = Archive.GetAllocator();
+
+	OutValue.AddMember("TexturePath", Value(TexturePath, Allocator), Allocator);
+	OutValue.AddMember("Scale_X", Value(Scale.X), Allocator);
+	OutValue.AddMember("Scale_Y", Value(Scale.Y), Allocator);
+	OutValue.AddMember("ZOrder", Value(ZOrder), Allocator);
+
+	return true;
+}
+
+bool CSpriteComponent::Deserialize(rapidjson::Value& InValue, SArchive& Archive)
+{
+	Super::Deserialize(InValue, Archive);
+
+	TexturePath = InValue["TexturePath"].GetString();
+	Scale.X = InValue["Scale_X"].GetFloat();
+	Scale.Y = InValue["Scale_Y"].GetFloat();
+	ZOrder = InValue["ZOrder"].GetInt();
+
+	Sprite.AssignNewTexture(TexturePath);
+
+	return true;
+}
+
 void CSpriteComponent::Draw() const
 {
 	if (Sprite.Texture)

@@ -2,6 +2,8 @@
 
 #include <type_traits>
 
+#define TO_STR(ClassMember) #ClassMember
+
 #ifdef WITH_EDITOR
 #define DECLARE_CLASS( ClassName, BaseClassName ) \
 	private: \

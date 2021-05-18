@@ -3,7 +3,6 @@
 
 #include "Core/Public/CoreMinimal.h"
 #include "Core/Public/ObjectManager.h"
-#include "Core/Public/ReflectionManager.h"
 #include "Object/Public/Level.h"
 
 #include "imgui/Public/imgui.h"
@@ -14,10 +13,6 @@
 #include "Core/Public/Component.h"
 #include "Core/Public/Actor.h"
 #include "Component/Public/OutlineComponent.h"
-
-/** sleepCOW: make sure ReflectionManager is created among first created objects */
-#pragma init_seg(compiler)
-CReflectionManager ReflectionManager;
 
 static ImVec2 WindowWidth()
 {
@@ -224,7 +219,7 @@ void CEditorEngine::ShowAddObject()
 {
 	ImGui::Begin("Add object to the level", &bShowAddObject);
 
-	Vector<String>& AllObjects = ReflectionManager.GetObjects();
+	Vector<String>& AllObjects = GReflectionManager.GetObjects();
 	assert(AllObjects.size()); // At least CObject should exist!
 	
 	/** #TODO sleepCOW: Ensure CObject always first in AllObjects list */
@@ -244,7 +239,7 @@ void CEditorEngine::ShowAddObject()
 
 	if (ImGui::Button("Create", WindowWidth())) 
 	{
-		ReflectionManager.CreateActor(AllObjects[Selected], GEngineLoop->GetLevel());
+		GReflectionManager.CreateActor(AllObjects[Selected], GEngine->GetLevel());
 		// Reset selected object
 	}
 
@@ -255,7 +250,7 @@ void CEditorEngine::ShowAddComponent()
 {
 	ImGui::Begin("Add Component", &bShowAddComponent);
 
-	Vector<String>& AllComponents = ReflectionManager.GetComponents();
+	Vector<String>& AllComponents = GReflectionManager.GetComponents();
 	assert(AllComponents.size()); // At least CObject should exist!
 
 	static int Selected = 0;
@@ -274,7 +269,7 @@ void CEditorEngine::ShowAddComponent()
 
 	if (ImGui::Button("Create", WindowWidth()))
 	{
-		ReflectionManager.CreateObject(AllComponents[Selected], SelectedObject);
+		GReflectionManager.CreateObject(AllComponents[Selected], SelectedObject);
 	}
 
 	ImGui::End();
@@ -287,6 +282,10 @@ void CEditorEngine::ShowPlayButtons()
 		if (ImGui::Button("Play in editor", WindowWidth()))
 		{
 			PlayInEditor();
+		}
+		if (ImGui::Button("Save Level", WindowWidth()))
+		{
+			CurrentLevel->SaveToJson();
 		}
 	}
 	else
@@ -313,7 +312,7 @@ void CEditorEngine::ShowLevelView()
 
 	ImGui::Text("Level view:");
 
-	Vector<CObject*>& Objects = GEngineLoop->GetLevel()->GetObjects();
+	Vector<CObject*>& Objects = GEngine->GetLevel()->GetObjects();
 	for (int i = 0; i < Objects.size(); ++i)
 	{
 		CObject* Object = Objects[i];

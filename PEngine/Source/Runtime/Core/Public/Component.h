@@ -21,6 +21,15 @@ public:
 	/** Object tick, called only in runtime */
 	virtual void Tick(float DeltaTime) override;
 
+	/**
+	 * Serialize object into json
+	 *
+	 * @param OutValue	json value that needs to be filled by the function
+	 * @param Archive	Helper object to serialize pointers & recieve additional serialization info
+	 * @return			true on success, false otherwise
+	 */
+	virtual bool Serialize(rapidjson::Value& OutValue, SArchive& Archive) override;
+
 #ifdef WITH_EDITOR
 	virtual void EditorTick(float DeltaTime) override;
 #endif

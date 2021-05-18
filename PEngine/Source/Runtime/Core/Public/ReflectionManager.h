@@ -1,4 +1,3 @@
-#ifdef WITH_EDITOR
 #pragma once
 
 #include "CoreMinimal.h"
@@ -18,8 +17,8 @@ public:
 	Vector<String>& GetObjects();
 	Vector<String>& GetComponents();
 
-	CObject* CreateObject(const String& ObjectName, CObject* Owner);
-	void CreateActor(const String& ObjectName, CLevel* Owner);
+	CObject* CreateObject(const String& ObjectType, CObject* Owner);
+	void CreateActor(const String& ObjectType, CLevel* Owner);
 
 
 protected:
@@ -37,4 +36,3 @@ class CReflectionData
 public:
 	CReflectionData(const String& ClassName, bool bComponent, NewObjectFunc Function, NewActorFunc ActorFunction);
 };
-#endif

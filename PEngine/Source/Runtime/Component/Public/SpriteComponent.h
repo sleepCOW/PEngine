@@ -19,6 +19,9 @@ public:
 	virtual void PostEditChangeProperty(SField& ChangedValue) override;
 #endif
 
+	virtual bool Serialize(rapidjson::Value& OutValue, SArchive& Archive) override;
+	virtual bool Deserialize(rapidjson::Value& InValue, SArchive& Archive) override;
+
 	virtual void Draw() const override;
 	SSprite& GetSprite() { return Sprite; }
 

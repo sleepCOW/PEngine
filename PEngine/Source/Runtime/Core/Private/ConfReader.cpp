@@ -8,34 +8,33 @@ using namespace rapidjson;
 
 constexpr size_t BufferSize = 65536; // 64 Kb
 
-CConfReader::CConfReader()
+CFileManager::CFileManager()
 {
 	ConfigurationDoc = OpenJSON(CONFIGURATION_PATH, true);
 
-	if (!ConfigurationDoc->Json.IsObject())
+	rapidjson::Document& Config = ConfigurationDoc->Json;
+	if (Config.HasParseError() || !Config.IsObject())
 	{
-		rapidjson::Document& Config = ConfigurationDoc->Json;
-		
 		Config.SetObject();
 		Config.AddMember("StartupLevel", Value(""), Config.GetAllocator());
 	}
 }
 
-CConfReader::~CConfReader()
+CFileManager::~CFileManager()
 {
 	/** Close all opened handles */
 	for (auto& File : OpenedFiles)
 	{
-		SaveJSON(File.Handle, File.Json);
+		SaveJSON(File.Handle, File.FileName, File.Json);
 	}
 }
 
-int CConfReader::GetInt(const String& ValueName)
+int CFileManager::GetInt(const String& ValueName)
 {
 	return GetIntFrom(ValueName, GetConfigurationDoc());
 }
 
-int CConfReader::GetIntFrom(const String& ValueName, rapidjson::Document& JsonDocument)
+int CFileManager::GetIntFrom(const String& ValueName, rapidjson::Document& JsonDocument)
 {
 	int Result = JsonDocument[ValueName.data()].GetInt();
 
@@ -46,12 +45,12 @@ int CConfReader::GetIntFrom(const String& ValueName, rapidjson::Document& JsonDo
 	return Result;
 }
 
-String CConfReader::GetString(const String& ValueName)
+String CFileManager::GetString(const String& ValueName)
 {
 	return GetStringFrom(ValueName, GetConfigurationDoc());
 }
 
-String CConfReader::GetStringFrom(const String& ValueName, rapidjson::Document& JsonDocument)
+String CFileManager::GetStringFrom(const String& ValueName, rapidjson::Document& JsonDocument)
 {
 	String Result = JsonDocument[ValueName.data()].GetString();
 
@@ -62,7 +61,7 @@ String CConfReader::GetStringFrom(const String& ValueName, rapidjson::Document& 
 	return Result;
 }
 
-CConfReader::SFile* CConfReader::OpenJSON(const String& Path, bool bCreateIfNull /*= false*/)
+CFileManager::SFile* CFileManager::OpenJSON(const String& Path, bool bCreateIfNull /*= false*/)
 {
 	// #TODO sleepCOW: Add check whether such file was already opened!
 	assert(Path.size() != 0);
@@ -87,13 +86,13 @@ CConfReader::SFile* CConfReader::OpenJSON(const String& Path, bool bCreateIfNull
 	// #TODO sleepCOW: Add check whether JSON file is valid!
 	Document JsonDoc;
 	JsonDoc.ParseStream(Is);
-	OpenedFiles.push_back({ FileHandle, std::move(JsonDoc) });
+	OpenedFiles.push_back({ FileHandle, Path, std::move(JsonDoc) });
 
 	// Return pointer to pushed element
 	return &OpenedFiles.back();
 }
 
-CConfReader::SFile* CConfReader::CreateJSON(const String& Path)
+CFileManager::SFile* CFileManager::CreateJSON(const String& Path)
 {
 	assert(Path.size() != 0);
 	
@@ -107,19 +106,22 @@ CConfReader::SFile* CConfReader::CreateJSON(const String& Path)
 	}
 	fprintf(stdout, "CConfReader::CreateJSON Created file %s for Read/Write access!\n", Path.data());
 
-	OpenedFiles.push_back({ FileHandle, Document() });
+	OpenedFiles.push_back({ FileHandle, Path, Document() });
 	return &OpenedFiles.back();
 }
 
-void CConfReader::SaveJSON(const String& Path, rapidjson::Document& JsonDocument)
+void CFileManager::SaveJSON(const String& Path, rapidjson::Document& JsonDocument)
 {
 	SFile* File = OpenJSON(Path, true);
 	File->Json = std::move(JsonDocument);
-	SaveJSON(File->Handle, JsonDocument);
+	SaveJSON(File->Handle, Path, JsonDocument);
 }
 
-void CConfReader::SaveJSON(FILE*& FileHandle, rapidjson::Document& JsonDocument)
+void CFileManager::SaveJSON(FILE*& FileHandle, const String& Path, rapidjson::Document& JsonDocument)
 {
+	// Reopen to erase content
+	freopen_s(&FileHandle, Path.data(), "w", FileHandle);
+
 	char WriteBuffer[BufferSize];
 	FileWriteStream os(FileHandle, WriteBuffer, BufferSize);
 	Writer<FileWriteStream> Writer(os);
