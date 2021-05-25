@@ -168,7 +168,7 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions);PLATFORM_WINDOWS;RAPIDJSON_HAS_STDSTRING = 1;RAPIDJSON_HAS_STDSTRING</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions);PLATFORM_WINDOWS;RAPIDJSON_HAS_STDSTRING</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <CompileAsWinRT>false</CompileAsWinRT>
       <AdditionalIncludeDirectories>$(SolutionDir)PEngine\Source\Runtime;$(SolutionDir)PEngine\Source\ThirdParty;$(SolutionDir)PEngine\Source\Editor;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>

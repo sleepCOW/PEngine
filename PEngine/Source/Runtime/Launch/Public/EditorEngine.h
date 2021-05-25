@@ -56,6 +56,8 @@ protected:
 	bool bShowCreateClass;
 	bool bShowLevelView;
 
+	bool bLevelViewHovered;
+
 	// UI END
 
 	// Input

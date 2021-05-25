@@ -68,8 +68,10 @@ void CEngine::Tick(float DeltaTime)
 {
 	for (auto& Object : ObjectManager->GetObjects())
 	{
+#ifdef WITH_EDITOR
 		// EditorTick is always enabled
 		Object->EditorTick(DeltaTime);
+#endif
 			
 		// If game not paused and object is marked tickable
 		if (!bGamePaused && Object->bTicking)
@@ -171,6 +173,8 @@ int Run(CEngine* EngineLoop)
 			float DeltaTime = (Start - End) / 1000.f;
 			SDL_RenderClear(GRenderer);
 
+			End = SDL_GetTicks();
+
 			while (SDL_PollEvent(&Event) != 0) {
 				EngineLoop->HandleInput(Event);
 			}
@@ -184,7 +188,6 @@ int Run(CEngine* EngineLoop)
 			SDL_SetRenderDrawColor(GRenderer, 0, 0, 0, 0);
 
 			SDL_RenderPresent(GRenderer);
-			End = SDL_GetTicks();
 			SDL_Delay(1);
 		}
 	}

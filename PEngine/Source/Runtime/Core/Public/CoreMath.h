@@ -54,5 +54,9 @@ struct SVector
 
 #ifdef WITH_EDITOR
 	float DragSpeed = 1.f;
+
+	void SetDragSpeed(float NewValue) { DragSpeed = NewValue; }
+#else
+	void SetDragSpeed(float NewValue) {}
 #endif
 };

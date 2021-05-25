@@ -59,8 +59,6 @@ protected:
 	rapidjson::Document* LevelJSON;
 };
 
-#ifdef WITH_EDITOR
-
 /**
 * Create object that is owned by this level
 */
@@ -70,4 +68,3 @@ void SpawnActor(CLevel* Level)
 	assert(Level);
 	Level->SpawnObject<T>();
 }
-#endif

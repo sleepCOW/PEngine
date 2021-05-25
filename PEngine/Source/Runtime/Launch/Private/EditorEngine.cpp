@@ -26,6 +26,7 @@ CEditorEngine::CEditorEngine()
 	bShowAddComponent = false;
 	bShowLevelView = true;
 	bGamePaused = true;
+	bLevelViewHovered = false;
 	SelectedObject = nullptr;
 
 	// Input
@@ -93,20 +94,23 @@ void CEditorEngine::HandleInput(const SDL_Event& Event)
 	{
 		if (Event.button.button == SDL_BUTTON_LEFT)
 		{
-			for (auto& Object : CurrentLevel->GetObjects())
+			if (!bLevelViewHovered)
 			{
-				CActor* Actor = dynamic_cast<CActor*>(Object);
-
-				if (!Actor)
-					continue;
-
-				// Actor guaranteed to have OutlineComponent
-				COutlineComponent* OutlineComp = Actor->GetComponentByClass<COutlineComponent>();
-					
-				if (SDL_PointInRect(&MousePosition, &OutlineComp->GetRectangle()))
+				for (auto& Object : CurrentLevel->GetObjects())
 				{
-					SelectedObject = Actor;
-					break;
+					CActor* Actor = dynamic_cast<CActor*>(Object);
+
+					if (!Actor)
+						continue;
+
+					// Actor guaranteed to have OutlineComponent
+					COutlineComponent* OutlineComp = Actor->GetComponentByClass<COutlineComponent>();
+					
+					if (SelectedObject != Actor && SDL_PointInRect(&MousePosition, &OutlineComp->GetRectangle()))
+					{
+						SelectedObject = Actor;
+						break;
+					}
 				}
 			}
 			bLMBDown = true;
@@ -143,9 +147,6 @@ void CEditorEngine::EditorUI(float DeltaTime)
 	if (bShowLevelView) ShowLevelView();
 	if (bShowCreateClass) ShowCreateClass();
 	if (bShowAddComponent) ShowAddComponent();
-
-	/** #TODO: Remove demo window */
-	ImGui::ShowDemoWindow();
 
 	ImGui::Render();
 	ImGuiSDL::Render(ImGui::GetDrawData());
@@ -200,6 +201,11 @@ void CEditorEngine::ShowMenuBar()
 			if (ImGui::MenuItem("Cut", "CTRL+X")) {}
 			if (ImGui::MenuItem("Copy", "CTRL+C")) {}
 			if (ImGui::MenuItem("Paste", "CTRL+V")) {}
+			ImGui::EndMenu();
+		}
+		if (ImGui::BeginMenu("View"))
+		{
+			if (ImGui::MenuItem("Level view")) { bShowLevelView = true; }
 			ImGui::EndMenu();
 		}
 		ImGui::EndMainMenuBar();
@@ -305,6 +311,8 @@ void CEditorEngine::ShowPlayButtons()
 void CEditorEngine::ShowLevelView()
 {
 	ImGui::Begin("Level view", &bShowLevelView);
+
+	bLevelViewHovered = ImGui::IsWindowHovered();
 
 	ShowPlayButtons();
 
