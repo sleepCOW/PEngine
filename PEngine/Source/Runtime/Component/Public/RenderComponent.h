@@ -21,4 +21,13 @@ public:
 
 	/** All draw calls must be inside of this function */
 	virtual void Draw() const;
+
+	/**
+	 * Lower = higher priority
+	 */
+	void SetZOrder(int NewValue);
+
+protected:
+
+	int ZOrder;
 };

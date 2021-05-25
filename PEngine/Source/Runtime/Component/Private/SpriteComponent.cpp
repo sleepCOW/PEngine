@@ -7,7 +7,7 @@ DEFINE_META(CSpriteComponent)
 CSpriteComponent::CSpriteComponent(CObject* Owner) : Super(Owner)
 {
 	Scale = { 1.f, 1.f };
-	Scale.DragSpeed = 0.01f;
+	Scale.SetDragSpeed(0.01f);
 }
 
 #ifdef WITH_EDITOR

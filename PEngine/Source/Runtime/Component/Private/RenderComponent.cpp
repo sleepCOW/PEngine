@@ -5,7 +5,7 @@ DEFINE_META(CRenderComponent)
 
 CRenderComponent::CRenderComponent(CObject* Owner) : Super(Owner)
 {
-
+	ZOrder = 0;
 }
 
 void CRenderComponent::PreInit()
@@ -24,6 +24,11 @@ void CRenderComponent::Tick(float DeltaTime)
 }
 
 void CRenderComponent::Draw() const
+{
+
+}
+
+void CRenderComponent::SetZOrder(int NewValue)
 {
 
 }

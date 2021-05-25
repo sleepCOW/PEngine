@@ -24,12 +24,11 @@ public:
 
 	virtual void Draw() const override;
 	SSprite& GetSprite() { return Sprite; }
+	SVector GetScale() const { return Scale; }
 
 protected:
 	String TexturePath;
 
 	SSprite Sprite;
 	SVector Scale;
-
-	int ZOrder;
 };
