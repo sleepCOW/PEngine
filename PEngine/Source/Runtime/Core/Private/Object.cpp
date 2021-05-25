@@ -79,6 +79,8 @@ bool CObject::Deserialize(rapidjson::Value& InValue, SArchive& Archive)
 	int ObjectOwnerIndex = InValue["ObjectOwnerIndex"].GetInt();
 	Owner = Archive.GetObjectFromIndex(ObjectOwnerIndex);
 
+	ObjectName = InValue[TO_STR(ObjectName)].GetString();
+
 	for (auto& Component : InValue[TO_STR(Components)].GetArray())
 	{
 		String ObjectType = Component["ObjectType"].GetString();

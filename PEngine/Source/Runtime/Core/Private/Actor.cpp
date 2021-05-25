@@ -45,9 +45,11 @@ bool CActor::Deserialize(rapidjson::Value& InValue, SArchive& Archive)
 	return true;
 }
 
+#ifdef WITH_EDITOR
 void CActor::FillEditorFields()
 {
 	Super::FillEditorFields();
 
 	AddEditorField("Location", &Location, EFieldType::MATH_VECTOR);
 }
+#endif
