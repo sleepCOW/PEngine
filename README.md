@@ -1,3 +1,3 @@
 # PEngine
 
-## Project description and installation guide will be written later :)
+Young me attempt to make something that looks like an engine, probably the most interesting part of the project is small implementation of reflection for the editor.
